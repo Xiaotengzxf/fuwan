@@ -25,6 +25,7 @@ PODS:
   - SnapKit (3.2.0)
   - SVProgressHUD (2.1.2)
   - SwiftyJSON (3.1.4)
+  - WebViewBridge.Swift (1.2)
 
 DEPENDENCIES:
   - Alamofire (~> 4.4.0)
@@ -42,6 +43,7 @@ DEPENDENCIES:
   - SnapKit (~> 3.2.0)
   - SVProgressHUD (~> 2.1.2)
   - SwiftyJSON
+  - WebViewBridge.Swift
 
 EXTERNAL SOURCES:
   ShareSDK3:
@@ -64,7 +66,8 @@ SPEC CHECKSUMS:
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
+  WebViewBridge.Swift: 40234ec896779e594f4aa643446d1d05db6d08f5
 
-PODFILE CHECKSUM: f2fb22e41f6ed66dd15477696394b85ff52c543d
+PODFILE CHECKSUM: 6f9c1d5716798d57eab313a3f7ce55947ebee056
 
 COCOAPODS: 1.2.1

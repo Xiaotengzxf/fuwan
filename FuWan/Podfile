@@ -1,7 +1,7 @@
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
 
-target '小礼品' do
+target 'Fuwan' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 
@@ -28,12 +28,14 @@ pod 'ShareSDK3/ShareSDKPlatforms/WeChat',:git => ‘https://git.oschina.net/MobC
 pod 'MOBFoundation_IDFA'
 pod 'SMSSDK'                               #短信验证SDK
 
-  target '小礼品Tests' do
+pod 'WebViewBridge.Swift'
+
+  target 'FuwanTests' do
     inherit! :search_paths
     # Pods for testing
   end
 
-  target '小礼品UITests' do
+  target 'FuwanUITests' do
     inherit! :search_paths
     # Pods for testing
   end

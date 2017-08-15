@@ -19,10 +19,10 @@ class MainViewController: UITabBarController {
 
     private func addChildViewController(){
         
-        addChildViewController(controller: HomeViewController(), title: "小礼品", imageName: "tabbar_home")
-        addChildViewController(controller: HotViewController(), title: "热门", imageName: "tabbar_gift")
-        addChildViewController(controller: ClassifyViewController(), title: "分类", imageName: "tabbar_category")
-        addChildViewController(controller: MeViewController(), title: "我", imageName: "tabbar_me")
+        addChildViewController(controller: mainClassifyViewController(), title: "主页", imageName: "tabbar_home")
+        addChildViewController(controller: HotViewController(), title: "服务", imageName: "tabbar_gift")
+        addChildViewController(controller: ClassifyViewController(), title: "直播", imageName: "tabbar_category")
+        addChildViewController(controller: MeViewController(), title: "我的", imageName: "tabbar_me")
     }
     
     private func addChildViewController(controller: UIViewController, title: String, imageName: String) {

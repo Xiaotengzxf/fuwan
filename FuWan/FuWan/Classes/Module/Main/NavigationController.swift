@@ -32,7 +32,7 @@ class NavigationController: UINavigationController {
         let appearance = UINavigationBar.appearance()
         appearance.isTranslucent = false
 
-        appearance.setBackgroundImage(UIImage.image(withColor: SystemNavgationBackgroundColor, withSize: CGSize(width: 1, height: 1)), for: UIBarMetrics.default)
+        appearance.setBackgroundImage(UIImage.image(withColor: SystemNavgationBarTintColor, withSize: CGSize(width: 1, height: 1)), for: UIBarMetrics.default)
   
         
         var textAttrs: [String : AnyObject] = Dictionary()

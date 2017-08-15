@@ -1,0 +1,6 @@
+framework module Pods_Fuwan {
+  umbrella header "Pods-Fuwan-umbrella.h"
+
+  export *
+  module * { export * }
+}

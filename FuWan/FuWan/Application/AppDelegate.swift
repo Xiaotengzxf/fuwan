@@ -14,7 +14,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
        //: 配置打印
        setupPrintLog()
@@ -26,8 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
        setupGlobalNotice()
        //: 配置ShareSDK
        setupShareSDK()
-       //: 配置SMSSDK
-       setupSMSSDK()
         
         return true
     }
@@ -57,7 +54,10 @@ extension AppDelegate {
     
     //: 设置主题样式
     fileprivate func setupGlobalStyle() {
-        UITabBar.appearance().tintColor = SystemTabBarTintColor
+        UITabBar.appearance().tintColor = SystemNavgationBarTintColor
+        UITabBar.appearance().isTranslucent = false
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: SystemNavgationBarTintColor], for: .selected)
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: SystemTabBarTintColor], for: .normal)
         UINavigationBar.appearance().tintColor = UIColor.white
         
         ProgressHUD.setupProgressHUD()

@@ -23,40 +23,35 @@ class LoginView: UIView {
     
     lazy var loginButton:UIButton = { () -> UIButton in
         let button = UIButton(type: .custom)
-        button.setTitle("登陆", for: .normal)
-        button.titleLabel?.font = fontSize15
+        button.setTitle("登 录", for: .normal)
+        button.titleLabel?.font = fontSize18
         button.setTitleColor(UIColor.white, for: .normal)
         button.setTitleColor(UIColor.white, for: .disabled)
         button.setBackgroundImage(UIImage.image(withColor: SystemNavgationBarTintColor, withSize: CGSize.zero), for: .normal)
         button.setBackgroundImage(UIImage.image(withColor: SystemTintDisableColor, withSize: CGSize.zero), for: .disabled)
         button.isEnabled = false
-        button.layer.cornerRadius = margin * 0.5
-        button.layer.masksToBounds = true
         return button
     }()
     
     lazy var registerButton:UIButton = { () -> UIButton in
         let button = UIButton(type: .custom)
-        button.setTitle("没有账号", for: .normal)
-        button.setTitleColor(SystemNavgationBarTintColor, for: .normal)
-        button.setTitleColor(UIColor.gray, for: .highlighted)
-        button.titleLabel?.font = fontSize12
+        button.setTitle("还没有账户？立即注册", for: .normal)
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.titleLabel?.font = fontSize14
         return button
     }()
     
-    lazy var passwdIconButton:UIButton = { () -> UIButton in
+    lazy var forgetPwdButton:UIButton = { () -> UIButton in
         let button = UIButton(type: .custom)
-        button.setImage(#imageLiteral(resourceName: "icon_signin_message"), for: .normal)
-        
+        button.setTitle("忘记密码？", for: .normal)
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.titleLabel?.font = fontSize14
         return button
-        
     }()
-    
-    lazy var phoneIconImage:UIImageView = UIImageView(image: #imageLiteral(resourceName: "icon_signin_cellphone"))
     
     lazy var phoneText:UITextField = { () -> UITextField in
         let field = UITextField()
-        field.font = fontSize14
+        field.font = fontSize16
         field.placeholder = "请输入手机号"
         field.keyboardType = .phonePad
         field.tintColor = SystemNavgationBarTintColor
@@ -66,7 +61,7 @@ class LoginView: UIView {
     
     lazy var passwordText:UITextField = { () -> UITextField in
         let field = UITextField()
-        field.font = fontSize14
+        field.font = fontSize16
         field.placeholder = "输入验证码"
         field.keyboardType = .numbersAndPunctuation
         field.tintColor = SystemNavgationBarTintColor
@@ -82,25 +77,6 @@ class LoginView: UIView {
         return view
     }()
     lazy var paswordBottomLine:UIView = { () -> UIView in
-        let view = UIView()
-        view.backgroundColor = UIColor.gray
-        return view
-    }()
-    
-    lazy var tipLabel:UILabel = { () -> UILabel in
-        let label = UILabel()
-        label.text = "使用社交账号登录"
-        label.font = fontSize12
-        return label
-    }()
-    
-    lazy var tipLabelLeftLine:UIView = { () -> UIView in
-        let view = UIView()
-        view.backgroundColor = UIColor.gray
-        return view
-    }()
-    
-    lazy var tipLabelRightLine:UIView = { () -> UIView in
         let view = UIView()
         view.backgroundColor = UIColor.gray
         return view
@@ -148,15 +124,11 @@ class LoginView: UIView {
     
         addSubview(loginButton)
         addSubview(registerButton)
-        addSubview(passwdIconButton)
-        addSubview(phoneIconImage)
+        addSubview(forgetPwdButton)
         addSubview(passwordText)
         addSubview(phoneText)
         addSubview(phoneInputBottomLine)
         addSubview(paswordBottomLine)
-        addSubview(tipLabel)
-        addSubview(tipLabelLeftLine)
-        addSubview(tipLabelRightLine)
         addSubview(qqButton)
         addSubview(wechatButton)
         addSubview(sinaButton)
@@ -164,6 +136,7 @@ class LoginView: UIView {
     
         loginButton.addTarget(self, action: #selector(loginButtonClick), for: .touchUpInside)
         registerButton.addTarget(self, action: #selector(registerButtonClick), for: .touchUpInside)
+        forgetPwdButton.addTarget(self, action: #selector(forgetPwdButtonClick), for: .touchUpInside)
         
         qqButton.addTarget(self, action: #selector(SocietyLoginButtonClick(button:)), for: .touchUpInside)
         wechatButton.addTarget(self, action: #selector(SocietyLoginButtonClick(button:)), for: .touchUpInside)
@@ -176,28 +149,27 @@ class LoginView: UIView {
     private func setupLoginViewSubView() {
         
         loginButton.snp.makeConstraints { (make) in
-            make.centerY.equalToSuperview()
-            make.left.equalToSuperview().offset(margin*4)
-            make.right.equalToSuperview().offset(-(margin*4))
-            make.height.equalTo(margin*4)
+            make.centerY.equalToSuperview().offset(-margin * 5)
+            make.left.equalToSuperview().offset(margin * 2)
+            make.right.equalToSuperview().offset(-(margin * 2))
+            make.height.equalTo(margin * 4)
+        }
+        
+        forgetPwdButton.snp.makeConstraints { (make) in
+            make.right.equalToSuperview().offset(-margin * 2)
+            make.bottom.equalTo(loginButton.snp.top).offset(-margin * 2)
         }
         
         registerButton.snp.makeConstraints { (make) in
-            make.left.equalTo(loginButton)
-            make.top.equalTo(loginButton.snp.bottom).offset(margin*1.5)
-        }
-        
-        passwdIconButton.snp.makeConstraints { (make) in
-            make.left.equalTo(loginButton.snp.left)
-            make.bottom.equalTo(loginButton.snp.top).offset(-(margin*3))
-            make.size.equalTo(CGSize(width: 14, height: 16))
+            make.right.equalToSuperview().offset(-margin * 2)
+            make.top.equalTo(loginButton.snp.bottom).offset(margin * 2)
         }
         
         passwordText.snp.makeConstraints { (make) in
-            make.left.equalTo(passwdIconButton.snp.right).offset(margin)
-            make.bottom.equalTo(loginButton.snp.top).offset(-(margin*2))
+            make.left.equalToSuperview().offset(margin * 2)
+            make.bottom.equalTo(forgetPwdButton.snp.top).offset(-(margin*2))
             make.right.equalToSuperview().offset(-margin * 4)
-            make.height.equalTo(margin*3.5)
+            make.height.equalTo(margin * 4)
         }
         
         paswordBottomLine.snp.makeConstraints { (make) in
@@ -207,15 +179,10 @@ class LoginView: UIView {
             make.height.equalTo(0.8)
         }
         
-        phoneIconImage.snp.makeConstraints { (make) in
-            make.left.size.equalTo(passwdIconButton)
-            make.bottom.equalTo(passwdIconButton.snp.top).offset(-(margin*2.5))
-        }
-        
         phoneText.snp.makeConstraints { (make) in
             make.left.width.equalTo(paswordBottomLine)
             make.bottom.equalTo(passwordText.snp.top).offset(-margin)
-            make.height.equalTo(margin*3)
+            make.height.equalTo(margin * 4)
         }
         
         phoneInputBottomLine.snp.makeConstraints { (make) in
@@ -224,29 +191,9 @@ class LoginView: UIView {
             make.height.equalTo(paswordBottomLine)
         }
         
-        tipLabel.snp.makeConstraints { (make) in
-            make.centerX.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-(margin*11))
-            make.size.equalTo(CGSize(width: margin*10, height: margin*1.5))
-        }
-        
-        tipLabelLeftLine.snp.makeConstraints { (make) in
-            make.right.equalTo(tipLabel.snp.left).offset(-(margin*1.5))
-            make.centerY.equalTo(tipLabel)
-            make.left.equalTo(loginButton)
-            make.height.equalTo(0.8)
-        }
-        
-        tipLabelRightLine.snp.makeConstraints { (make) in
-            make.left.equalTo(tipLabel.snp.right).offset(margin*1.5)
-            make.centerY.equalTo(tipLabel)
-            make.right.equalTo(loginButton)
-            make.height.equalTo(tipLabelLeftLine)
-        }
-        
         wechatButton.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
-            make.top.equalTo(tipLabel.snp.bottom).offset(margin*3)
+            make.top.equalTo(registerButton.snp.bottom).offset(margin * 3)
             make.width.height.equalTo(margin*3.6)
         }
         
@@ -278,6 +225,10 @@ class LoginView: UIView {
     
     @objc private func registerButtonClick() {
         delegate?.loginViewTurnToRegisterViewButtonClick()
+    }
+    
+    func forgetPwdButtonClick() {
+        
     }
 
 

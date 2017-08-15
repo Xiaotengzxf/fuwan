@@ -9,14 +9,14 @@
 import UIKit
 
 //: 系统导航栏主题色
-let SystemNavgationBarTintColor:UIColor =  UIColor(red: 255.0/255.0, green: 2.0/255.0, blue: 51.0/255, alpha: 1.0)
-let SystemTabBarTintColor:UIColor = UIColor(red: 255.0/255.0, green: 2.0/255.0, blue: 51.0/255, alpha: 1.0)
-let SystemGlobalBackgroundColor = UIColor(red: 240.0/255.0, green: 240.0/255.0, blue: 240.0/255.0, alpha: 1.0)
+let SystemNavgationBarTintColor:UIColor =  UIColor(red: 85.0/255.0, green: 153.0/255.0, blue: 68.0/255, alpha: 1.0)
+let SystemTabBarTintColor:UIColor = UIColor(red: 51.0/255.0, green: 51.0/255.0, blue: 51.0/255, alpha: 1.0)
+let SystemGlobalBackgroundColor = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0)
 let SystemGlobalLineColor = UIColor(red: 237.0/255.0, green: 240.0/255.0, blue: 240.0/255.0, alpha: 1.0)
 let SystemNavgationBackgroundColor = UIColor(red: 251.0/255.0, green: 45.0/255.0, blue: 71.0/255.0, alpha: 1.0)
-let SystemTintDisableColor = UIColor(red: 230.0/255.0, green: 100.0/255.0, blue: 100.0/255, alpha: 1.0)
+let SystemTintDisableColor = UIColor(red: 86.0/255.0, green: 154.0/255.0, blue: 69.0/255, alpha: 1.0)
 
-
+// #559944
 
 let fontSize10:UIFont = UIFont.systemFont(ofSize: 10.0)
 let fontSize12:UIFont = UIFont.systemFont(ofSize: 12.0)

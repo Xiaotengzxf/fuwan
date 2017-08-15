@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		06AB0A0EDE96D1E9948DF11B /* Pods_FuwanTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 394C7930EEB84202F650BFAB /* Pods_FuwanTests.framework */; };
+		0C762E02228398D104183CAC /* Pods_FuwanUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D7105EDE7797B9B6028F37B /* Pods_FuwanUITests.framework */; };
+		6BD634553520A797C0D04C6E /* Pods_Fuwan.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CA2E5AA710D8935ECD8FD59 /* Pods_Fuwan.framework */; };
 		850843D01EAF45E5001BEEF4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850843CF1EAF45E5001BEEF4 /* AppDelegate.swift */; };
 		850843D21EAF4633001BEEF4 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850843D11EAF4633001BEEF4 /* Config.swift */; };
 		850843D51EAF70E1001BEEF4 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 850843D41EAF70E1001BEEF4 /* libicucore.tbd */; };
@@ -81,7 +84,6 @@
 		850844971EAF91DE001BEEF4 /* StrategyColumnViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850844401EAF91DE001BEEF4 /* StrategyColumnViewCell.swift */; };
 		850844981EAF91DE001BEEF4 /* StrategySectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850844411EAF91DE001BEEF4 /* StrategySectionView.swift */; };
 		850844991EAF91DE001BEEF4 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850844421EAF91DE001BEEF4 /* TitleView.swift */; };
-		8508449A1EAF91DE001BEEF4 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850844451EAF91DE001BEEF4 /* HomeViewController.swift */; };
 		8508449B1EAF91DE001BEEF4 /* mainClassifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850844461EAF91DE001BEEF4 /* mainClassifyViewController.swift */; };
 		8508449C1EAF91DE001BEEF4 /* HotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8508444A1EAF91DE001BEEF4 /* HotViewController.swift */; };
 		8508449D1EAF91DE001BEEF4 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8508444D1EAF91DE001BEEF4 /* MainViewController.swift */; };
@@ -410,6 +412,8 @@
 		85E389741EA64A5A008BA044 /* strategy_7.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 85E389631EA64A5A008BA044 /* strategy_7.jpg */; };
 		85E389751EA64A5A008BA044 /* strategy_8.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 85E389641EA64A5A008BA044 /* strategy_8.jpg */; };
 		85E389761EA64A5A008BA044 /* strategy_9.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 85E389651EA64A5A008BA044 /* strategy_9.jpg */; };
+		9A2BF0D71F43023200561ADB /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A2BF0D61F43023200561ADB /* WebViewController.swift */; };
+		9A2BF0D91F4311FA00561ADB /* WKWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A2BF0D81F4311FA00561ADB /* WKWebViewController.swift */; };
 		B2694B13F41F18607078E414 /* Pods____.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF2DC5C99C772F02DD6074DA /* Pods____.framework */; };
 		D1FF5F862CB714AA62DB17C7 /* Pods____Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D016F7EF5B21BD9D070B068 /* Pods____Tests.framework */; };
 		E78210B38EE9ECAC721CBDAE /* Pods____UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90D93438A1D0D71A5B9B4A23 /* Pods____UITests.framework */; };
@@ -434,7 +438,10 @@
 
 /* Begin PBXFileReference section */
 		0D016F7EF5B21BD9D070B068 /* Pods____Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods____Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		394C7930EEB84202F650BFAB /* Pods_FuwanTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FuwanTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DDD3FBFD083EB882FBF021E /* Pods-小礼品UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-小礼品UITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-小礼品UITests/Pods-小礼品UITests.release.xcconfig"; sourceTree = "<group>"; };
+		46918E9985CFBF9D152F97C8 /* Pods-FuwanUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FuwanUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FuwanUITests/Pods-FuwanUITests.release.xcconfig"; sourceTree = "<group>"; };
+		5CA2E5AA710D8935ECD8FD59 /* Pods_Fuwan.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fuwan.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A67C7E369D2A666ED2052C8 /* Pods-小礼品UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-小礼品UITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-小礼品UITests/Pods-小礼品UITests.debug.xcconfig"; sourceTree = "<group>"; };
 		7D29FA95E1AE2D917FB09994 /* Pods-小礼品.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-小礼品.release.xcconfig"; path = "Pods/Target Support Files/Pods-小礼品/Pods-小礼品.release.xcconfig"; sourceTree = "<group>"; };
 		850843CF1EAF45E5001BEEF4 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -512,7 +519,6 @@
 		850844401EAF91DE001BEEF4 /* StrategyColumnViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StrategyColumnViewCell.swift; sourceTree = "<group>"; };
 		850844411EAF91DE001BEEF4 /* StrategySectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StrategySectionView.swift; sourceTree = "<group>"; };
 		850844421EAF91DE001BEEF4 /* TitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
-		850844451EAF91DE001BEEF4 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		850844461EAF91DE001BEEF4 /* mainClassifyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainClassifyViewController.swift; sourceTree = "<group>"; };
 		8508444A1EAF91DE001BEEF4 /* HotViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HotViewController.swift; sourceTree = "<group>"; };
 		8508444D1EAF91DE001BEEF4 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -847,9 +853,17 @@
 		85E389631EA64A5A008BA044 /* strategy_7.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = strategy_7.jpg; sourceTree = "<group>"; };
 		85E389641EA64A5A008BA044 /* strategy_8.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = strategy_8.jpg; sourceTree = "<group>"; };
 		85E389651EA64A5A008BA044 /* strategy_9.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = strategy_9.jpg; sourceTree = "<group>"; };
+		8D7105EDE7797B9B6028F37B /* Pods_FuwanUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FuwanUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		90D93438A1D0D71A5B9B4A23 /* Pods____UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods____UITests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		914BEA3EF1834E51179853BE /* Pods-小礼品Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-小礼品Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-小礼品Tests/Pods-小礼品Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		9A2BF0D61F43023200561ADB /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		9A2BF0D81F4311FA00561ADB /* WKWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WKWebViewController.swift; sourceTree = "<group>"; };
+		9EB44B32340277C0647C8D52 /* Pods-FuwanTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FuwanTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FuwanTests/Pods-FuwanTests.debug.xcconfig"; sourceTree = "<group>"; };
 		AF2DC5C99C772F02DD6074DA /* Pods____.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods____.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B2741B15182C4867D5306A02 /* Pods-FuwanTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FuwanTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FuwanTests/Pods-FuwanTests.release.xcconfig"; sourceTree = "<group>"; };
+		B6D449DFF3C3CDA69229F438 /* Pods-Fuwan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fuwan.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fuwan/Pods-Fuwan.debug.xcconfig"; sourceTree = "<group>"; };
+		BF7F90BACE8E62E1B1441E1B /* Pods-Fuwan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fuwan.release.xcconfig"; path = "Pods/Target Support Files/Pods-Fuwan/Pods-Fuwan.release.xcconfig"; sourceTree = "<group>"; };
+		D51C941E6FEB821C8E2512BD /* Pods-FuwanUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FuwanUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FuwanUITests/Pods-FuwanUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		D856249A59D5ACBE0F9F3E13 /* Pods-小礼品.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-小礼品.debug.xcconfig"; path = "Pods/Target Support Files/Pods-小礼品/Pods-小礼品.debug.xcconfig"; sourceTree = "<group>"; };
 		F5C89778817AD80C06808E21 /* Pods-小礼品Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-小礼品Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-小礼品Tests/Pods-小礼品Tests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -871,6 +885,7 @@
 				850843D71EAF70F1001BEEF4 /* libz.tbd in Frameworks */,
 				850843D51EAF70E1001BEEF4 /* libicucore.tbd in Frameworks */,
 				B2694B13F41F18607078E414 /* Pods____.framework in Frameworks */,
+				6BD634553520A797C0D04C6E /* Pods_Fuwan.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -879,6 +894,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D1FF5F862CB714AA62DB17C7 /* Pods____Tests.framework in Frameworks */,
+				06AB0A0EDE96D1E9948DF11B /* Pods_FuwanTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -887,6 +903,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E78210B38EE9ECAC721CBDAE /* Pods____UITests.framework in Frameworks */,
+				0C762E02228398D104183CAC /* Pods_FuwanUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -910,6 +927,9 @@
 				AF2DC5C99C772F02DD6074DA /* Pods____.framework */,
 				0D016F7EF5B21BD9D070B068 /* Pods____Tests.framework */,
 				90D93438A1D0D71A5B9B4A23 /* Pods____UITests.framework */,
+				5CA2E5AA710D8935ECD8FD59 /* Pods_Fuwan.framework */,
+				394C7930EEB84202F650BFAB /* Pods_FuwanTests.framework */,
+				8D7105EDE7797B9B6028F37B /* Pods_FuwanUITests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1143,7 +1163,6 @@
 		850844441EAF91DE001BEEF4 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				850844451EAF91DE001BEEF4 /* HomeViewController.swift */,
 				850844461EAF91DE001BEEF4 /* mainClassifyViewController.swift */,
 			);
 			path = Controllers;
@@ -1744,6 +1763,8 @@
 				850843FA1EAF914B001BEEF4 /* Module */,
 				850843F71EAF8FE2001BEEF4 /* Utils */,
 				850843E81EAF8FD8001BEEF4 /* Categories */,
+				9A2BF0D61F43023200561ADB /* WebViewController.swift */,
+				9A2BF0D81F4311FA00561ADB /* WKWebViewController.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1796,6 +1817,12 @@
 				F5C89778817AD80C06808E21 /* Pods-小礼品Tests.release.xcconfig */,
 				7A67C7E369D2A666ED2052C8 /* Pods-小礼品UITests.debug.xcconfig */,
 				3DDD3FBFD083EB882FBF021E /* Pods-小礼品UITests.release.xcconfig */,
+				B6D449DFF3C3CDA69229F438 /* Pods-Fuwan.debug.xcconfig */,
+				BF7F90BACE8E62E1B1441E1B /* Pods-Fuwan.release.xcconfig */,
+				9EB44B32340277C0647C8D52 /* Pods-FuwanTests.debug.xcconfig */,
+				B2741B15182C4867D5306A02 /* Pods-FuwanTests.release.xcconfig */,
+				D51C941E6FEB821C8E2512BD /* Pods-FuwanUITests.debug.xcconfig */,
+				46918E9985CFBF9D152F97C8 /* Pods-FuwanUITests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -2200,7 +2227,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-小礼品/Pods-小礼品-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Fuwan/Pods-Fuwan-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		701CD5AC1712B42263AC23C1 /* [CP] Check Pods Manifest.lock */ = {
@@ -2230,7 +2257,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-小礼品/Pods-小礼品-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Fuwan/Pods-Fuwan-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B1DEED8F047A5FE2667C4032 /* [CP] Check Pods Manifest.lock */ = {
@@ -2260,7 +2287,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-小礼品Tests/Pods-小礼品Tests-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FuwanTests/Pods-FuwanTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DE7CA86CDB8C8BB33FCB5D0D /* [CP] Copy Pods Resources */ = {
@@ -2275,7 +2302,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-小礼品UITests/Pods-小礼品UITests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FuwanUITests/Pods-FuwanUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E20580C83A003185BB74960A /* [CP] Check Pods Manifest.lock */ = {
@@ -2305,7 +2332,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-小礼品UITests/Pods-小礼品UITests-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FuwanUITests/Pods-FuwanUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F8EAAC3354565C51A536A969 /* [CP] Copy Pods Resources */ = {
@@ -2320,7 +2347,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-小礼品Tests/Pods-小礼品Tests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FuwanTests/Pods-FuwanTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -2376,6 +2403,7 @@
 				857A3A471EB4AA98000A26DB /* ChatBar.swift in Sources */,
 				850843F01EAF8FD8001BEEF4 /* DispatchQueue+Extension.swift in Sources */,
 				850844A51EAF91DE001BEEF4 /* CustomButton.swift in Sources */,
+				9A2BF0D71F43023200561ADB /* WebViewController.swift in Sources */,
 				8589BD4A1EC5FC2900C313AE /* EmojiGroupControlCell.swift in Sources */,
 				850844A11EAF91DE001BEEF4 /* MeViewController.swift in Sources */,
 				85A3FE9E1EC8A96300A74F6A /* BaseEmojiCellViewModel.swift in Sources */,
@@ -2432,6 +2460,7 @@
 				8508448D1EAF91DE001BEEF4 /* SingleGiftCell.swift in Sources */,
 				850844601EAF91DE001BEEF4 /* BannerCarouselView.swift in Sources */,
 				8508448E1EAF91DE001BEEF4 /* SingleGiftCellViewModel.swift in Sources */,
+				9A2BF0D91F4311FA00561ADB /* WKWebViewController.swift in Sources */,
 				850844961EAF91DE001BEEF4 /* StrategyColumnSubCellViewModel.swift in Sources */,
 				854A977A1EC4D91B004A671A /* BaseEmojiCell.swift in Sources */,
 				8508447E1EAF91DE001BEEF4 /* SearchViewController.swift in Sources */,
@@ -2442,7 +2471,6 @@
 				8508449C1EAF91DE001BEEF4 /* HotViewController.swift in Sources */,
 				850844941EAF91DE001BEEF4 /* StrategyClassifyViewCellViewModel.swift in Sources */,
 				8523603A1EB8CD91006FAF19 /* RecordVoiceView.swift in Sources */,
-				8508449A1EAF91DE001BEEF4 /* HomeViewController.swift in Sources */,
 				850844751EAF91DE001BEEF4 /* Refresh.swift in Sources */,
 				850844651EAF91DE001BEEF4 /* BaseClassifyViewModel.swift in Sources */,
 				850844901EAF91DE001BEEF4 /* SingleGiftColumnCellViewModel.swift in Sources */,
@@ -2625,7 +2653,7 @@
 		};
 		85E3890C1EA12761008BA044 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D856249A59D5ACBE0F9F3E13 /* Pods-小礼品.debug.xcconfig */;
+			baseConfigurationReference = B6D449DFF3C3CDA69229F438 /* Pods-Fuwan.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -2643,7 +2671,7 @@
 		};
 		85E3890D1EA12761008BA044 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7D29FA95E1AE2D917FB09994 /* Pods-小礼品.release.xcconfig */;
+			baseConfigurationReference = BF7F90BACE8E62E1B1441E1B /* Pods-Fuwan.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -2661,7 +2689,7 @@
 		};
 		85E3890F1EA12761008BA044 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 914BEA3EF1834E51179853BE /* Pods-小礼品Tests.debug.xcconfig */;
+			baseConfigurationReference = 9EB44B32340277C0647C8D52 /* Pods-FuwanTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -2677,7 +2705,7 @@
 		};
 		85E389101EA12761008BA044 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F5C89778817AD80C06808E21 /* Pods-小礼品Tests.release.xcconfig */;
+			baseConfigurationReference = B2741B15182C4867D5306A02 /* Pods-FuwanTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -2693,7 +2721,7 @@
 		};
 		85E389121EA12761008BA044 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7A67C7E369D2A666ED2052C8 /* Pods-小礼品UITests.debug.xcconfig */;
+			baseConfigurationReference = D51C941E6FEB821C8E2512BD /* Pods-FuwanUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = H2H2868WN7;
@@ -2708,7 +2736,7 @@
 		};
 		85E389131EA12761008BA044 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3DDD3FBFD083EB882FBF021E /* Pods-小礼品UITests.release.xcconfig */;
+			baseConfigurationReference = 46918E9985CFBF9D152F97C8 /* Pods-FuwanUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = H2H2868WN7;

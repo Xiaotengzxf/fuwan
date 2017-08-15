@@ -19,6 +19,7 @@ class loginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "用户登录"
+        self.view.backgroundColor = UIColor.white
         setupLoginView()
     }
 

@@ -7,40 +7,20 @@
 //
 
 import UIKit
-import MJRefresh
 
-class HotViewController: BaseGoodsViewController {
+class HotViewController: WebViewController {
 
 //MARK: 系统方法
     override func viewDidLoad() {
+        strUrl = CATEGORY_URL
         super.viewDidLoad()
 
-        setupHotView()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-//MARK: 私有方法
+
     
-    private func setupHotView() {
-        view.backgroundColor = SystemGlobalBackgroundColor
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem("icon_navigation_search", target: self, action: #selector(searchButtonClick))
-        
-        let head = Refresh(refreshingTarget: self, refreshingAction: #selector(pullDownLoadData))
-        mainView.mj_header = head
-    }
-//MARK: 内部响应
-    @objc private func searchButtonClick() {
-        
-    }
-    
-    @objc private func pullDownLoadData() {
-        
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
-            self.mainView.mj_header.endRefreshing()
-        }
-    }
 }
