@@ -1,6 +1,6 @@
 //
 //  NetworkTools.swift
-//  小礼品
+//  someone
 //
 //  Created by zxf on 2017/4/25.
 //  Copyright © 2017年 zxf. All rights reserved.
@@ -56,7 +56,7 @@ extension NetworkTools {
      - parameter parameters: 参数
      - parameter finished:   完成回调
      */
-    func get(_ url:String,parameters:[String:Any?],finished:@escaping FinishedOperation) {
+    func get(_ url:String,parameters:[String:Any]?,finished:@escaping FinishedOperation) {
         //: 显示网络活动状态
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
     

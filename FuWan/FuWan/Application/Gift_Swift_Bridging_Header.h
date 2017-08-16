@@ -1,6 +1,6 @@
 //
 //  Gift_Swift_Bridging_Header.h
-//  小礼品
+//  someone
 //
 //  Created by zxf on 2017/4/25.
 //  Copyright © 2017年 zxf. All rights reserved.

@@ -8,13 +8,11 @@
 
 import UIKit
 import WebKit
-import WebViewBridge_Swift
 
-class WebViewController: UIViewController, WKUIDelegate {
+class WebViewController: UIViewController, WKUIDelegate, WKScriptMessageHandler {
     
     var mWebView: WKWebView!
     var strUrl : String?
-    var bridge : ZHWebViewBridge?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +24,12 @@ class WebViewController: UIViewController, WKUIDelegate {
             let cookieScript = WKUserScript(source: script, injectionTime: WKUserScriptInjectionTime.atDocumentStart, forMainFrameOnly: false)
             userContentController.addUserScript(cookieScript)
         }
+        userContentController.add(self, name: "login")
         let webviewConfig = WKWebViewConfiguration()
+        webviewConfig.preferences = WKPreferences()
+        webviewConfig.preferences.minimumFontSize = 10
+        webviewConfig.preferences.javaScriptEnabled = true
+        webviewConfig.preferences.javaScriptCanOpenWindowsAutomatically = false
         webviewConfig.userContentController = userContentController
         mWebView = WKWebView(frame: CGRect.zero, configuration: webviewConfig)
         mWebView.translatesAutoresizingMaskIntoConstraints = false
@@ -43,7 +46,6 @@ class WebViewController: UIViewController, WKUIDelegate {
             mWebView.load(request)
         }
         
-        bridge = ZHWebViewBridge.bridge(mWebView!)
     }
 
     override func didReceiveMemoryWarning() {
@@ -80,6 +82,12 @@ class WebViewController: UIViewController, WKUIDelegate {
             result += "'; "
         }
         return result
+    }
+    
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        if message.name == "login" {
+            
+        }
     }
 
 }

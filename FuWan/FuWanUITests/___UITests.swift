@@ -1,6 +1,6 @@
 //
 //  ___UITests.swift
-//  小礼品UITests
+//  someoneUITests
 //
 //  Created by zxf on 2017/4/14.
 //  Copyright © 2017年 zxf. All rights reserved.

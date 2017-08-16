@@ -1,6 +1,6 @@
 //
 //  StrategyClassifyViewCellViewModel.swift
-//  小礼品
+//  someone
 //
 //  Created by zxf on 2017/4/21.
 //  Copyright © 2017年 zxf. All rights reserved.

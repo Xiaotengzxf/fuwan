@@ -1,6 +1,6 @@
 //
 //  BannerCarouselViewCell.swift
-//  小礼品
+//  someone
 //
 //  Created by zxf on 2017/4/18.
 //  Copyright © 2017年 zxf. All rights reserved.
@@ -8,12 +8,14 @@
 
 import UIKit
 import SnapKit
+import SDWebImage
+import SwiftyJSON
 
 class BannerCarouselViewCell: UICollectionViewCell {
 //MARK: 属性
-    var viewModel:BannerCarouseViewModel? {
+    var viewModel:JSON? {
         didSet {
-            pageView.image = viewModel?.pageImage
+            pageView.sd_setImage(with: URL(string: viewModel!["pic"].stringValue), placeholderImage: UIImage(named: "logo"))
         }
     }
 //MARK: 懒加载

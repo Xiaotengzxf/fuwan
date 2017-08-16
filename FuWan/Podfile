@@ -5,7 +5,7 @@ target 'Fuwan' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 
-  # Pods for 小礼品
+  # Pods for someone
 pod 'LSXPropertyTool', '~>0.0.9'           #个人写的属性生产器，字典转模型工具
 
 pod 'QorumLogs'                            #带颜色的log输出 Swift 3.0

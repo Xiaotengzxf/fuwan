@@ -1,6 +1,6 @@
 //
 //  BannerCarouselView.swift
-//  小礼品
+//  someone
 //
 //  Created by zxf on 2017/4/18.
 //  Copyright © 2017年 zxf. All rights reserved.
@@ -9,29 +9,27 @@
 import UIKit
 import SnapKit
 import QorumLogs
+import SwiftyJSON
 
 let timeInterval = 2.0
-let numberOfPage = 4
 let pageLoopCount = 1000
 let cellHeight:CGFloat = 300.0
 let pageCotrolYOffSetOfBottom:CGFloat = 12.0
 
-
-
 class BannerCarouselView: UICollectionView {
-
+    
+    var arrModel : [JSON] = []
 //MARK: 属性
     fileprivate let identifier = "BannerCarouselCell"
     //: 定时器
     private var timer:Timer?
 //MARK: 懒记载
-    fileprivate lazy var pageControl:UIPageControl = { () -> UIPageControl in
+    lazy var pageControl:UIPageControl = { () -> UIPageControl in
         let control = UIPageControl()
         
         control.currentPageIndicatorTintColor = SystemNavgationBarTintColor
         
         control.pageIndicatorTintColor = UIColor(white: 0, alpha: 0.1)
-        control.numberOfPages = numberOfPage
         
         return control
     }()
@@ -47,7 +45,6 @@ class BannerCarouselView: UICollectionView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        setupBannerCarouselViewSubView()
     }
     
     
@@ -68,14 +65,14 @@ class BannerCarouselView: UICollectionView {
        
     }
     
-    private func setupBannerCarouselViewSubView() {
+    func setupBannerCarouselViewSubView() {
     
         DispatchQueue.once(token: "pageControl.layout") {
             self.pageControl.center.x = self.bounds.width * 0.5;
             self.pageControl.frame.origin.y = self.bounds.height - (pageCotrolYOffSetOfBottom + self.pageControl.bounds.height);
             
             //: 移动到中心位置
-            scrollToItem(at: IndexPath(item: numberOfPage * pageLoopCount/2, section: 0) , at:.left, animated: true)
+            scrollToItem(at: IndexPath(item: arrModel.count * pageLoopCount/2, section: 0) , at:.left, animated: true)
         }
        
     }
@@ -101,8 +98,8 @@ class BannerCarouselView: UICollectionView {
         let current = indexPathsForVisibleItems.last
         var item = current!.item + 1
         
-        if current!.item + 1 > numberOfPage * pageLoopCount / 2 + pageLoopCount * (numberOfPage - 1)/2 {
-            item = numberOfPage * pageLoopCount / 2
+        if current!.item + 1 > arrModel.count * pageLoopCount / 2 + pageLoopCount * (arrModel.count - 1)/2 {
+            item = arrModel.count * pageLoopCount / 2
         }
         scrollToItem(at: IndexPath(item: item, section: 0) , at:.left, animated: true)
     }
@@ -116,14 +113,14 @@ extension BannerCarouselView:UICollectionViewDelegate,UICollectionViewDataSource
     }
     //: 页数
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return numberOfPage*pageLoopCount
+        return arrModel.count * pageLoopCount
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! BannerCarouselViewCell
         
         
-        cell.viewModel = BannerCarouseViewModel(withModel: BannerDataModel())
+        cell.viewModel = arrModel[indexPath.row % arrModel.count]
         
         return cell
     }
@@ -139,7 +136,7 @@ extension BannerCarouselView:UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         pageControl.center.x = scrollView.contentOffset.x + (ScreenWidth * 0.5)
-        let page = (scrollView.contentOffset.x / scrollView.bounds.width + 0.5).truncatingRemainder(dividingBy: CGFloat(numberOfPage))
+        let page = (scrollView.contentOffset.x / scrollView.bounds.width + 0.5).truncatingRemainder(dividingBy: CGFloat(arrModel.count))
 
         pageControl.currentPage = Int(page)
     }
