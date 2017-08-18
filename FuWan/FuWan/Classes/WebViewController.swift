@@ -24,7 +24,7 @@ class WebViewController: UIViewController, WKUIDelegate, WKScriptMessageHandler 
             let cookieScript = WKUserScript(source: script, injectionTime: WKUserScriptInjectionTime.atDocumentStart, forMainFrameOnly: false)
             userContentController.addUserScript(cookieScript)
         }
-        userContentController.add(self, name: "login")
+        userContentController.add(self, name: "jshook")
         let webviewConfig = WKWebViewConfiguration()
         webviewConfig.preferences = WKPreferences()
         webviewConfig.preferences.minimumFontSize = 10
@@ -85,7 +85,17 @@ class WebViewController: UIViewController, WKUIDelegate, WKScriptMessageHandler 
     }
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        if message.name == "login" {
+        if message.name == "jshook" {
+            if let body = message.body as? [String : String] {
+                if let function = body["function"] {
+                    if function == "login" {
+                        let controller = loginViewController()
+                        controller.hidesBottomBarWhenPushed = true
+                        self.navigationController?.pushViewController(controller, animated: true)
+                    }
+                }
+            }
+            
             
         }
     }
