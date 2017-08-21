@@ -10,14 +10,10 @@ import UIKit
 import SnapKit
 
 class TopicViewCell: UICollectionViewCell {
-//MARK: 属性
-    var viewModel:TopicViewModel? {
-        didSet{
-            imageView.image = viewModel?.image
-        }
-    }
+
 //MARK: 懒加载
     lazy var imageView:UIImageView = UIImageView()
+    lazy var label : UILabel = UILabel()
 //MARK: 构造方法
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -36,11 +32,17 @@ class TopicViewCell: UICollectionViewCell {
 //MARK: 私有方法
     private func setupTopicViewCell() {
         addSubview(imageView)
+        addSubview(label)
     }
     
     private func setupTopicViewSubView() {
         imageView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview().inset(UIEdgeInsets.zero)
+            make.width.height.equalTo(40)
+            make.center.equalToSuperview()
+        }
+        label.snp.makeConstraints { (make) in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(imageView).offset(10)
         }
     }
 }

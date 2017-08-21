@@ -12,17 +12,13 @@ import QorumLogs
 
 class AccountModel: NSObject,NSCoding {
     
-    var id: Int = 0
-    //: 用户id
-    var uid: String?
-    //: 昵称
-    var nickname:String?
-    //: 头像
-    var avatar:String?
-    //: 心情寄语
-    var say:String?
-    //: 性别
-    var sex: Int = 0
+    var info: String?
+    var message: String?
+    var referer: String?
+    var state: String?
+    var status = 0
+    var url: String?
+    
     //: 账户单例
     static func shareAccount() -> AccountModel? {
         if userAccount == nil {
@@ -82,48 +78,41 @@ class AccountModel: NSObject,NSCoding {
 
     //: 实现归解档的NSCoding代理方法
     func encode(with aCoder: NSCoder){
-        aCoder.encode(uid, forKey: "uid_key")
-        aCoder.encode(nickname, forKey: "nickname_key")
-        aCoder.encode(avatar, forKey: "avatar_key")
-        aCoder.encode(say, forKey: "say_key")
-        aCoder.encode(sex, forKey: "sex_key")
+        aCoder.encode(info, forKey: "info")
+        aCoder.encode(message, forKey: "message")
+        aCoder.encode(referer, forKey: "referer")
+        aCoder.encode(state, forKey: "state")
+        aCoder.encode(status, forKey: "status")
+        aCoder.encode(url, forKey: "url")
     }
     
     required  init?(coder aDecoder: NSCoder) {
-       uid = aDecoder.decodeObject(forKey: "uid_key") as? String
-       nickname = aDecoder.decodeObject(forKey: "nickname_key") as? String
-       avatar = aDecoder.decodeObject(forKey: "avatar_key") as? String
-       say = aDecoder.decodeObject(forKey: "say_key")  as? String
-       sex = aDecoder.decodeInteger(forKey: "sex_key") as Int
+       info = aDecoder.decodeObject(forKey: "info") as? String
+       message = aDecoder.decodeObject(forKey: "message") as? String
+       referer = aDecoder.decodeObject(forKey: "referer") as? String
+       state = aDecoder.decodeObject(forKey: "state")  as? String
+       status = aDecoder.decodeInteger(forKey: "status") as Int
+       url = aDecoder.decodeObject(forKey: "url") as? String
     }
     
-    //: 账户模型转对外数据模型
-    func toUserModel() -> UserModel{
-        assert(AccountModel.isLogin(), "用户登陆后才可以获取用户信息！")
-        
-        let user = UserModel()
-        
-        user.uid = uid
-        user.avatarUrl = avatar
-        user.nickname = nickname
-        
-        return user
+    func token() -> String? {
+        var token : String?
+        if let info = AccountModel.shareAccount()?.info {
+            let array = info.components(separatedBy: "&")
+            for item in array {
+                if item.hasPrefix("token=") {
+                    token = item.substring(from: item.index(item.startIndex, offsetBy: 6))
+                }
+            }
+        }
+        return token
     }
+    
 }
 
 //MARK: 登陆相关
 extension AccountModel {
-    /**
-     第三方登录
-     
-     - parameter type:     类型 qq weibo wechat
-     - parameter openid:   uid
-     - parameter token:    token
-     - parameter nickname: 昵称
-     - parameter avatar:   头像
-     - parameter sex:      性别 0:女 1:男
-     - parameter finished: 完成回调
-     */
+
     class func thirdAccountLogin(_ type: String, openid: String, token: String
         , nickname: String, avatar: String, sex: Int
         , finished: @escaping (_ success: Bool, _ tip: String) -> ()) {
@@ -139,18 +128,16 @@ extension AccountModel {
         
     
         
-        NetworkTools.shared.get(LOGIN, parameters: parameters) { (isSucess, result, error) in
+        NetworkTools.shared.get(LOGIN_URL, parameters: parameters) { (isSucess, result, error) in
             
             guard let result = result else {
                 finished(false, "您的网络不给力哦")
                 return
             }
             
-            if result["status"] == "success" {
-                
-                //: 字典转模型
-                let account = ExchangeToModel.model(withClassName: "AccountModel", withDictionary: result["result"].dictionaryObject!) as! AccountModel
-                //: 存储用户信息
+            if result["state"] == "success" {
+        
+                let account = ExchangeToModel.model(withClassName: "AccountModel", withDictionary: result.dictionaryObject!) as! AccountModel
                 account.saveAccountInfo()
                 
                 finished(true,"登陆成功")

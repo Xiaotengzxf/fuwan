@@ -33,16 +33,8 @@ extension NetworkTools {
         switch response.result {
         case .success(let value):
             QL1(value)
-            
             let json = JSON(value)
-            if json["code"].intValue >= 4000 {
-                // token失效 退出登录
-                
-                finished(false, json, nil)
-            } else {
-                
-                finished(true, json, nil)
-            }
+            finished(true, json, nil)
         case .failure(let error):
             finished(false, nil, error as NSError?)
         }
@@ -73,11 +65,11 @@ extension NetworkTools {
      - parameter finished:   完成回调
      */
     
-    func post(_ url:String,parameters: [String : Any]?, finished: @escaping FinishedOperation ) {
+    func post(_ url:String,parameters: [String : Any]?, headers: HTTPHeaders? = nil, finished: @escaping FinishedOperation ) {
         //: 显示网络活动状态
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         
-        Alamofire.request(url, method: .post, parameters: parameters, encoding: URLEncoding.default, headers:nil).responseJSON { (response) in
+        Alamofire.request(url, method: .post, parameters: parameters, encoding: URLEncoding.default, headers:headers).responseJSON { (response) in
             self.handle(response: response, finished: finished)
         }
     }

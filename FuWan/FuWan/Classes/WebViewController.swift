@@ -40,12 +40,17 @@ class WebViewController: UIViewController, WKUIDelegate, WKScriptMessageHandler 
         self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[webView]|", options: .directionLeadingToTrailing, metrics: nil, views: ["webView" : mWebView]))
         self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[webView]|", options: .directionLeadingToTrailing, metrics: nil, views: ["webView" : mWebView]))
         
-        if strUrl != nil && strUrl!.hasPrefix("http") {
-            let url = URL(string: strUrl!)
-            let request = URLRequest(url: url!)
-            mWebView.load(request)
+        mWebView.evaluateJavaScript("navigator.userAgent") {[weak self] (result, error) in
+            if let useAgent = result as? String {
+                self?.mWebView.customUserAgent = "\(useAgent);FuWanBroswer;FWB-IOS"
+                
+                if self!.strUrl != nil && self!.strUrl!.hasPrefix("http") {
+                    let url = URL(string: self!.strUrl!)
+                    let request = URLRequest(url: url!)
+                    self!.mWebView.load(request)
+                }
+            }
         }
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -89,9 +94,13 @@ class WebViewController: UIViewController, WKUIDelegate, WKScriptMessageHandler 
             if let body = message.body as? [String : String] {
                 if let function = body["function"] {
                     if function == "login" {
-                        let controller = loginViewController()
-                        controller.hidesBottomBarWhenPushed = true
-                        self.navigationController?.pushViewController(controller, animated: true)
+                        if let _ = AccountModel.shareAccount()?.token() {
+                            
+                        }else{
+                            let controller = loginViewController()
+                            controller.hidesBottomBarWhenPushed = true
+                            self.navigationController?.pushViewController(controller, animated: true)
+                        }
                     }
                 }
             }
@@ -114,6 +123,7 @@ extension WebViewController : WKNavigationDelegate{
     // 页面加载完成之后调用
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!){
         /// 获取网页title
+        
         
     }
     // 页面加载失败时调用

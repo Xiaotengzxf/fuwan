@@ -8,6 +8,7 @@
 
 import UIKit
 import QorumLogs
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -26,10 +27,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
        //: 配置ShareSDK
        setupShareSDK()
         
+        registerAPNS(application: application)
+        BPush.registerChannel(launchOptions, apiKey: "uVkPUTLjGXy2SoL9tQlXA3Pu", pushMode: .development, withFirstAction: "打开", withSecondAction: "关闭", withCategory: "富玩", useBehaviorTextInput: true, isDebug: true)
+        if let userInfo = launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] {
+            BPush.handleNotification(userInfo as! [AnyHashable : Any])
+        }
         return true
     }
     
 
+    // register anple push notification sevice
+    func registerAPNS(application: UIApplication) {
+        if #available(iOS 10.0, *) {
+            // For iOS 10 display notification (sent via APNS)
+            UNUserNotificationCenter.current().delegate = self
+            
+            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+            UNUserNotificationCenter.current().requestAuthorization(
+                options: authOptions,
+                completionHandler: {_, _ in })
+        } else {
+            let settings: UIUserNotificationSettings =
+                UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            application.registerUserNotificationSettings(settings)
+        }
+        
+        application.registerForRemoteNotifications()
+        
+        
+    }
 
 }
 
@@ -68,11 +94,6 @@ extension AppDelegate {
         //: 注册系统通知
         NotificationCenter.default.addObserver(self, selector: #selector(changeDefaultRootViewController(notification:)), name: NSNotification.Name(rawValue: SystemChangeRootViewControllerNotification), object: nil)
 
-    }
-    
-    //: 配置ShareSDK
-    fileprivate func setupSMSSDK() {
-        SMSSDK.registerApp(SMSSDK_APP_KEY, withSecret: SMSSDK_APP_SECRET)
     }
     
     //: 配置ShareSDK
@@ -176,4 +197,25 @@ extension AppDelegate {
     func applicationDidBecomeActive(_ application: UIApplication) {
      
     }
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
+        
+    }
+    
+    func application(_ application: UIApplication, handleActionWithIdentifier identifier: String?, forRemoteNotification userInfo: [AnyHashable : Any], completionHandler: @escaping () -> Void) {
+        
+    }
+    
+    func application(_ application: UIApplication, handleActionWithIdentifier identifier: String?, forRemoteNotification userInfo: [AnyHashable : Any], withResponseInfo responseInfo: [AnyHashable : Any], completionHandler: @escaping () -> Void) {
+        
+    }
+    
+    func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        
+    }
+}
+
+@available(iOS 10.0, *)
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    
 }

@@ -20,11 +20,10 @@ PODS:
     - MOBFoundation_IDFA
   - ShareSDK3/ShareSDKUI (3.6.3):
     - MOBFoundation_IDFA
-  - SMSSDK (2.1.5):
-    - MOBFoundation_IDFA
   - SnapKit (3.2.0)
   - SVProgressHUD (2.1.2)
   - SwiftyJSON (3.1.4)
+  - Toaster (2.0.4)
   - WebViewBridge.Swift (1.2)
 
 DEPENDENCIES:
@@ -39,10 +38,10 @@ DEPENDENCIES:
   - ShareSDK3/ShareSDKPlatforms/SinaWeibo (from `https://git.oschina.net/MobClub/ShareSDK-for-iOS-Spec.git`)
   - ShareSDK3/ShareSDKPlatforms/WeChat (from `https://git.oschina.net/MobClub/ShareSDK-for-iOS-Spec.git`)
   - ShareSDK3/ShareSDKUI (from `https://git.oschina.net/MobClub/ShareSDK-for-iOS-Spec.git`)
-  - SMSSDK
   - SnapKit (~> 3.2.0)
   - SVProgressHUD (~> 2.1.2)
   - SwiftyJSON
+  - Toaster
   - WebViewBridge.Swift
 
 EXTERNAL SOURCES:
@@ -62,12 +61,12 @@ SPEC CHECKSUMS:
   QorumLogs: 9a484df6973a3697ac79fe2273140fde6b36dccc
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   ShareSDK3: 782fac3e79208983cc379b5f82ab4224853229d7
-  SMSSDK: 7d19654f9d36392988e96bf697afdac983808b1a
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
+  Toaster: f13031c636ef065281bc11857be9a16c7659e04f
   WebViewBridge.Swift: 40234ec896779e594f4aa643446d1d05db6d08f5
 
-PODFILE CHECKSUM: 6f9c1d5716798d57eab313a3f7ce55947ebee056
+PODFILE CHECKSUM: 88cf7ea3bcc562fa5f0c57d681dba4ad2348dd7e
 
 COCOAPODS: 1.2.1

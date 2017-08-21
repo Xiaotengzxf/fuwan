@@ -10,6 +10,7 @@ import UIKit
 import SnapKit
 import LSXPropertyTool
 import QorumLogs
+import Toaster
 
 class loginViewController: UIViewController {
 
@@ -61,8 +62,39 @@ extension loginViewController:LoginViewDelegate {
         present(RegisterViewController(), animated: true, completion: nil)
     }
     
-    func loginViewLoginButtonClick(withPhone phone: String?, withPassword passwd: String?) {
+    func loginViewLoginButtonClick(withPhone phone: String?, withPassword passwd: String?) { //15137152986
+        guard let mobile = phone else {
+            Toast(text: "手机号码不能为空").show()
+            return
+        }
+        if !mobile.validataPhone() {
+            Toast(text: "手机号码输入有误").show()
+            return
+        }
+        guard let pwd = passwd else {
+            Toast(text: "密码不能为空").show()
+            return
+        }
+        var parameters : [String : Any] = ["ajax" : "1", "device_type" : "iOS"]
+        parameters["username"] = mobile
+        parameters["password"] = pwd
+        parameters["imei"] = ""
         
+        NetworkTools.shared.post(LOGIN_URL, parameters: parameters) { (isSuccess, result, error) in
+            if isSuccess {
+                if let state = result?["state"].string, state == "success" {
+                    
+                    let account = ExchangeToModel.model(withClassName: "AccountModel", withDictionary: result!.dictionaryObject!) as! AccountModel
+                    account.saveAccountInfo()
+                    
+                    NotificationCenter.default.post(name: Notification.Name("Me"), object: 1)
+                    
+                    self.navigationController?.popViewController(animated: true)
+                }
+            }else{
+                
+            }
+        }
     }
                                    
     func loginViewSocietyLoginButtonClick(withType type: SocietyType) {

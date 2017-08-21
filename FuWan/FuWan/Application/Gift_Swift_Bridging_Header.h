@@ -25,6 +25,6 @@
 //MARK: 新浪SDK 相关
 #import "WeiboSDK.h"
 
-//MARK: SMSSDK 相关
-#import <SMS_SDK/SMSSDK.h>
+#import "BPush.h"
+
 

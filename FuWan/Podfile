@@ -26,7 +26,7 @@ pod 'ShareSDK3/ShareSDKPlatforms/WeChat',:git => ‘https://git.oschina.net/MobC
 
 # Mod 支持的SMSSDK短信验证功能
 pod 'MOBFoundation_IDFA'
-pod 'SMSSDK'                               #短信验证SDK
+pod 'Toaster'
 
 pod 'WebViewBridge.Swift'
 

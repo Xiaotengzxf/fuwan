@@ -13,13 +13,6 @@ import UIKit
 let SHARESDK_APP_KEY = "1d0572a9b388c"
 let SHARESDK_APP_SECRET = "52eb18eae68cdccbd8bdd68c626d5fb2"
 
-//: 基础动态库(libicucore.tdb,libz.tdb,libstdc++.tdb,libsqlite3.tdb,
-//:          JavaScriptCore.framework,SystemConfiguration.framework,CoreTelephony.framework,AdSupport.framework)
-//: SMSSDK 短信验证功能 (http://dashboard.mob.com/)
-let SMSSDK_APP_KEY = "1d603160fb212"
-let SMSSDK_APP_SECRET = "e8c6c981b3e98a58c2948d057d49cd2e"
-
-
 //: 依赖动态库 (libsqlite3.tdb)
 //: QQ 相关 (http://open.qq.com/)
 //: URL Schemes QQ41ECF175 转换方法:(echo 'ibase=10obase=161106047349'|bc)
