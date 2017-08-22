@@ -60,7 +60,8 @@ class mainClassifyViewController: BaseClassifyViewController {
         headView.snp.makeConstraints { (make) in
             make.left.top.equalToSuperview()
             make.width.equalTo(ScreenWidth)
-            make.height.equalTo(bannerCarouselViewHeight + (ScreenWidth * 2 / 5 + 2) + 10)
+            let height : CGFloat = ScreenWidth * 2 / 5 + 2
+            make.height.equalTo(CGFloat(bannerCarouselViewHeight + 30) + height)
         }
 
         bannerCarousel.snp.makeConstraints { (make) in
@@ -75,6 +76,7 @@ class mainClassifyViewController: BaseClassifyViewController {
         }
         
         tableView.tableHeaderView = headView
+        tableView.tableHeaderView?.bounds = CGRect(x: 0, y: 0, width: ScreenWidth, height: CGFloat(bannerCarouselViewHeight + 30) + CGFloat(ScreenWidth * 2 / 5 + 2))
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -92,148 +94,3 @@ class mainClassifyViewController: BaseClassifyViewController {
         
     }
 }
-
-/*{
- "status": "success",
- "datas": [
- {
- "lists": [
- {
- 
- },
- {
- "id": "8",
- "name": "2",
- "url": "",
- "pic": "https://mst.fuwan369.com/admin/20170506/20170506191620590db084f2d72.png",
- "end": "1532966400",
- "listorder": "0",
- "modelid": "0"
- },
- {
- "id": "9",
- "name": "3",
- "url": "",
- "pic": "https://mst.fuwan369.com/admin/20170506/20170506191634590db0922b3c9.png",
- "end": "1532966400",
- "listorder": "0",
- "modelid": "0"
- }
- ],
- "type": "index_banner"
- },
- {
- "lists": [],
- "type": "search_default_text"
- },
- {
- "lists": [],
- "type": "hot_search_word"
- },
- {
- "lists": [],
- "type": "index_four_ad"
- },
- {
- "lists": [],
- "type": "index_recom_ad"
- },
- {
- "lists": [
- {
- "id": "22",
- "name": "娱乐",
- "url": "",
- "pic": "https://mst.fuwan369.com/admin/20170527/2017052721121159297b2bb6bfd.png",
- "end": "1530028800",
- "listorder": "0",
- "modelid": "40"
- },
- {
- "id": "23",
- "name": "酒店",
- "url": "",
- "pic": "https://mst.fuwan369.com/admin/20170527/2017052721134559297b899fb63.png",
- "end": "1530028800",
- "listorder": "0",
- "modelid": "34"
- },
- {
- "id": "24",
- "name": "餐饮",
- "url": "",
- "pic": "https://mst.fuwan369.com/admin/20170527/2017052721215859297d762ad8d.png",
- "end": "1529942400",
- "listorder": "0",
- "modelid": "33"
- },
- {
- "id": "25",
- "name": "旅游",
- "url": "",
- "pic": "https://mst.fuwan369.com/admin/20170527/2017052721221659297d886f05c.png",
- "end": "1530028800",
- "listorder": "0",
- "modelid": "36"
- },
- {
- "id": "26",
- "name": "车辆",
- "url": "",
- "pic": "https://mst.fuwan369.com/admin/20170527/2017052721223159297d97f2eb7.png",
- "end": "1530028800",
- "listorder": "0",
- "modelid": "37"
- },
- {
- "id": "27",
- "name": "商城",
- "url": "",
- "pic": "https://mst.fuwan369.com/admin/20170527/2017052721231759297dc51e84e.png",
- "end": "1530028800",
- "listorder": "0",
- "modelid": "41"
- },
- {
- "id": "28",
- "name": "社区",
- "url": "",
- "pic": "https://mst.fuwan369.com/admin/20170527/2017052721233559297dd7e7072.png",
- "end": "1530115200",
- "listorder": "0",
- "modelid": "35"
- },
- {
- "id": "29",
- "name": "游戏",
- "url": "game",
- "pic": "https://mst.fuwan369.com/admin/20170527/2017052721265559297e9f7c130.png",
- "end": "1530028800",
- "listorder": "0",
- "modelid": "0"
- },
- {
- "id": "30",
- "name": "公告",
- "url": "",
- "pic": "https://mst.fuwan369.com/admin/20170527/2017052721272159297eb94df22.png",
- "end": "1529942400",
- "listorder": "0",
- "modelid": "39"
- },
- {
- "id": "31",
- "name": "更多",
- "url": "",
- "pic": "https://mst.fuwan369.com/admin/20170527/201705272311585929973ef11bc.png",
- "end": "1530028800",
- "listorder": "0",
- "modelid": "0"
- }
- ],
- "type": "index_module"
- }
- ]
- }*/
-
-

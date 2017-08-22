@@ -11,6 +11,7 @@ import SnapKit
 
 fileprivate let cellColumns = 1
 fileprivate let cellScale:CGFloat = 340.0 / 90.0
+let cellMargin :CGFloat = 10
 
 class AllClassifyViewController: UIViewController {
 //MARK: 属性

@@ -48,7 +48,8 @@ extension TopicCollectionView:UICollectionViewDelegate,UICollectionViewDataSourc
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! TopicViewCell
         let model = collectionData[indexPath.row]
-        
+        cell.imageView.sd_setImage(with: URL(string: model["pic"].stringValue), placeholderImage: nil)
+        cell.label.text = model["name"].stringValue
         
         return cell
     }

@@ -43,11 +43,12 @@ class TopicViewCell: UICollectionViewCell {
     private func setupTopicViewSubView() {
         imageView.snp.makeConstraints { (make) in
             make.width.height.equalTo(40)
-            make.center.equalToSuperview()
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview().offset(-5)
         }
         label.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
-            make.top.equalTo(imageView.snp.bottom).offset(10)
+            make.top.equalTo(imageView.snp.bottom).offset(5)
         }
     }
 }
