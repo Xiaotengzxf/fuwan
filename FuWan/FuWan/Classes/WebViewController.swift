@@ -13,6 +13,7 @@ import Toaster
 class WebViewController: UIViewController, WKScriptMessageHandler {
     
     var mWebView: WKWebView!
+    var indicatorView: UIActivityIndicatorView!
     var strUrl : String?
     var bSingle = false
     
@@ -59,6 +60,20 @@ class WebViewController: UIViewController, WKScriptMessageHandler {
                 }
             }
         }
+        
+        mWebView.addObserver(self, forKeyPath: "title", options: .new, context: nil)
+        
+        
+        indicatorView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        indicatorView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(indicatorView)
+        
+        self.view.addConstraint(NSLayoutConstraint(item: indicatorView, attribute: .centerX, relatedBy: .equal, toItem: mWebView, attribute: .centerX, multiplier: 1, constant: 0))
+        self.view.addConstraint(NSLayoutConstraint(item: indicatorView, attribute: .centerY, relatedBy: .equal, toItem: mWebView, attribute: .centerY, multiplier: 1, constant: 0))
+        
+        
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "backItemImage"), style: .plain, target: self, action: #selector(self.tapBack))
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -66,7 +81,25 @@ class WebViewController: UIViewController, WKScriptMessageHandler {
         // Dispose of any resources that can be recreated.
     }
     
+    deinit {
+        mWebView.removeObserver(self, forKeyPath: "title")
+    }
     
+    func tapBack() {
+        if mWebView.canGoBack {
+            mWebView.goBack()
+        }else{
+            self.navigationController?.popViewController(animated: true)
+        }
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == "title" {
+            title = mWebView.title
+        }else  {
+            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
+        }
+    }
 
     /*
     // MARK: - Navigation
@@ -119,9 +152,8 @@ class WebViewController: UIViewController, WKScriptMessageHandler {
                         self.navigationController?.popViewController(animated: true)
                     }else if function == "openWindow" {
                         if let strUrl = body["parameters"], strUrl.hasPrefix("http") {
-                            let url = URL(string: strUrl)
-                            let request = URLRequest(url: url!)
-                            self.mWebView.load(request)
+                            let webView = WebViewController(url: strUrl)
+                            self.navigationController?.pushViewController(webView, animated: true)
                         }
                     }else if function == "copy" {
                         if let strContent = body["parameters"] {
@@ -140,6 +172,19 @@ class WebViewController: UIViewController, WKScriptMessageHandler {
                         if let strContent = body["parameters"] {
                             Toast(text: strContent).show()
                         }
+                    }else if function == "openWindowSetting" {
+                        if let strUrl = body["parameters"], strUrl.hasPrefix("http") {
+                            let webView = WebViewController(url: strUrl)
+                            self.navigationController?.pushViewController(webView, animated: true)
+                        }
+                    }else if function == "getVersion" {
+                        mWebView.evaluateJavaScript("showVersion(\"{versionCode:\"\(Bundle.main.infoDictionary!["CFBundleShortVersionString"])\",versionName:\"富玩\"}\")", completionHandler: { (result, error) in
+                            
+                        })
+                    }else if function == "update" {
+                        Toast(text: "当前版本已是最新版").show()
+                    }else if function == "setPageSetting" {
+                        
                     }
                 }
             }
@@ -163,11 +208,11 @@ class WebViewController: UIViewController, WKScriptMessageHandler {
 extension WebViewController : WKNavigationDelegate{
     // 页面开始加载时调用
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!){
-        
+        indicatorView.startAnimating()
     }
     // 当内容开始返回时调用
     func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!){
-        
+        indicatorView.stopAnimating()
     }
     // 页面加载完成之后调用
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!){
@@ -178,11 +223,12 @@ extension WebViewController : WKNavigationDelegate{
                 
             }
         }
+        indicatorView.stopAnimating()
         
     }
     // 页面加载失败时调用
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error){
-        
+        indicatorView.stopAnimating()
     }
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
