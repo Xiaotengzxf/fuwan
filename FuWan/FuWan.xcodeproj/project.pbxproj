@@ -1032,7 +1032,6 @@
 			isa = PBXGroup;
 			children = (
 				850844441EAF91DE001BEEF4 /* Controllers */,
-				850844471EAF91DE001BEEF4 /* Views */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1043,13 +1042,6 @@
 				850844461EAF91DE001BEEF4 /* mainClassifyViewController.swift */,
 			);
 			path = Controllers;
-			sourceTree = "<group>";
-		};
-		850844471EAF91DE001BEEF4 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		850844481EAF91DE001BEEF4 /* Hot */ = {

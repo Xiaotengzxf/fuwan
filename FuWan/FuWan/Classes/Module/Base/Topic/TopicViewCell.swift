@@ -13,7 +13,12 @@ class TopicViewCell: UICollectionViewCell {
 
 //MARK: 懒加载
     lazy var imageView:UIImageView = UIImageView()
-    lazy var label : UILabel = UILabel()
+    lazy var label : UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 14)
+        label.textColor = UIColor.darkGray
+        return label
+    }()
 //MARK: 构造方法
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -42,7 +47,7 @@ class TopicViewCell: UICollectionViewCell {
         }
         label.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
-            make.top.equalTo(imageView).offset(10)
+            make.top.equalTo(imageView.snp.bottom).offset(10)
         }
     }
 }

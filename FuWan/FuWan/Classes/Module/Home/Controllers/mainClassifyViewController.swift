@@ -10,7 +10,6 @@ import UIKit
 import SnapKit
 
 let  bannerCarouselViewHeight = 160
-let  topicViewHeight = 120
 
 class mainClassifyViewController: BaseClassifyViewController {
 
@@ -38,6 +37,9 @@ class mainClassifyViewController: BaseClassifyViewController {
                             self?.bannerCarousel.pageControl.numberOfPages = data["lists"].arrayValue.count
                             self?.bannerCarousel.reloadData()
                             self?.bannerCarousel.setupBannerCarouselViewSubView()
+                        }else if let type = data["type"].string, type == "index_module" {
+                            self?.topicView.collectionData = data["lists"].arrayValue
+                            self?.topicView.reloadData()
                         }
                     }
                 }
@@ -58,7 +60,7 @@ class mainClassifyViewController: BaseClassifyViewController {
         headView.snp.makeConstraints { (make) in
             make.left.top.equalToSuperview()
             make.width.equalTo(ScreenWidth)
-            make.height.equalTo(bannerCarouselViewHeight + topicViewHeight + 10)
+            make.height.equalTo(bannerCarouselViewHeight + (ScreenWidth * 2 / 5 + 2) + 10)
         }
 
         bannerCarousel.snp.makeConstraints { (make) in
@@ -69,7 +71,7 @@ class mainClassifyViewController: BaseClassifyViewController {
         topicView.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
             make.top.equalTo(bannerCarousel.snp.bottom)
-            make.height.equalTo(topicViewHeight)
+            make.height.equalTo(ScreenWidth * 2 / 5 + 2)
         }
         
         tableView.tableHeaderView = headView

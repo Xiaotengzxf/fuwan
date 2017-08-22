@@ -7,10 +7,13 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 
 
 class TopicCollectionView: UICollectionView {
+    
+    var collectionData: [JSON] = []
     fileprivate let identifier = "TopicCell"
 //MARK: 构造方法
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
@@ -39,28 +42,26 @@ class TopicCollectionView: UICollectionView {
 extension TopicCollectionView:UICollectionViewDelegate,UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 15
+        return collectionData.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! TopicViewCell
+        let model = collectionData[indexPath.row]
         
-        cell.viewModel = TopicViewModel(withModel: TopicDataModel())
         
         return cell
     }
 }
 
-let cellMargin:CGFloat = 10.0
-
 class TopicFlowLayout:UICollectionViewFlowLayout{
     override func prepare() {
         super.prepare()
         
-        minimumInteritemSpacing = cellMargin * 0.5
-        minimumLineSpacing = cellMargin
+        minimumInteritemSpacing = 0
+        minimumLineSpacing = 0
         scrollDirection = .horizontal
         
-        itemSize = CGSize(width: collectionView!.bounds.height - cellMargin*2, height: collectionView!.bounds.height - cellMargin*2)
+        itemSize = CGSize(width: ScreenWidth / 5, height: ScreenWidth / 5)
     }
 }
