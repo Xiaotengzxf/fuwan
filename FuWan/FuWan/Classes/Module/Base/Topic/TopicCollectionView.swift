@@ -15,6 +15,7 @@ class TopicCollectionView: UICollectionView {
     
     var collectionData: [JSON] = []
     fileprivate let identifier = "TopicCell"
+    var topicDelegate: TopicCollectionViewDelegate?
 //MARK: 构造方法
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         super.init(frame: frame, collectionViewLayout: layout)
@@ -53,6 +54,11 @@ extension TopicCollectionView:UICollectionViewDelegate,UICollectionViewDataSourc
         
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        topicDelegate?.selectedIndexPath(indexPath: indexPath, item: collectionData[indexPath.row])
+    }
 }
 
 class TopicFlowLayout:UICollectionViewFlowLayout{
@@ -65,4 +71,8 @@ class TopicFlowLayout:UICollectionViewFlowLayout{
         
         itemSize = CGSize(width: ScreenWidth / 5, height: ScreenWidth / 5)
     }
+}
+
+protocol TopicCollectionViewDelegate {
+    func selectedIndexPath(indexPath: IndexPath, item: JSON)
 }

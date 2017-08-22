@@ -65,7 +65,7 @@ class BaseClassifyViewController: UIViewController {
 //MARK: 代理方法 -> 
 extension BaseClassifyViewController:UITableViewDelegate,UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 15
+        return 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

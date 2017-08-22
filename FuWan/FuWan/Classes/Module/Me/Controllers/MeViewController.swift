@@ -11,6 +11,7 @@ import WebKit
 
 class MeViewController: WebViewController {
 
+    var bLoad = false
     
 //MARK: 系统方法
     override func viewDidLoad() {
@@ -46,7 +47,7 @@ class MeViewController: WebViewController {
     
     // 加载用户的信息
     func loadUserInfo() {
-        if let token = AccountModel.shareAccount()?.token() {
+        if let token = AccountModel.shareAccount()?.token(), token.characters.count > 0 {
             self.mWebView.evaluateJavaScript("load_data('\(token)')", completionHandler: { (result, error) in
                 
             })
@@ -57,7 +58,10 @@ class MeViewController: WebViewController {
     override func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!){
         /// 获取网页title
         super.webView(webView, didCommit: navigation)
-        loadUserInfo()
+        if !bLoad {
+            bLoad = true
+            loadUserInfo()
+        }
         
     }
  

@@ -352,7 +352,6 @@
 		9A2BF10A1F46F63000561ADB /* BPushCerResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9A2BF1071F46F63000561ADB /* BPushCerResource.bundle */; };
 		9A2BF10B1F46F63000561ADB /* libBPush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2BF1081F46F63000561ADB /* libBPush.a */; };
 		9A2BF10C1F46F63000561ADB /* test.caf in Resources */ = {isa = PBXBuildFile; fileRef = 9A2BF1091F46F63000561ADB /* test.caf */; };
-		B2694B13F41F18607078E414 /* Pods____.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF2DC5C99C772F02DD6074DA /* Pods____.framework */; };
 		D1FF5F862CB714AA62DB17C7 /* Pods____Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D016F7EF5B21BD9D070B068 /* Pods____Tests.framework */; };
 		E78210B38EE9ECAC721CBDAE /* Pods____UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90D93438A1D0D71A5B9B4A23 /* Pods____UITests.framework */; };
 /* End PBXBuildFile section */
@@ -377,11 +376,8 @@
 /* Begin PBXFileReference section */
 		0D016F7EF5B21BD9D070B068 /* Pods____Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods____Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		394C7930EEB84202F650BFAB /* Pods_FuwanTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FuwanTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3DDD3FBFD083EB882FBF021E /* Pods-小礼品UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-小礼品UITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-小礼品UITests/Pods-小礼品UITests.release.xcconfig"; sourceTree = "<group>"; };
 		46918E9985CFBF9D152F97C8 /* Pods-FuwanUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FuwanUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FuwanUITests/Pods-FuwanUITests.release.xcconfig"; sourceTree = "<group>"; };
 		5CA2E5AA710D8935ECD8FD59 /* Pods_Fuwan.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fuwan.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7A67C7E369D2A666ED2052C8 /* Pods-小礼品UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-小礼品UITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-小礼品UITests/Pods-小礼品UITests.debug.xcconfig"; sourceTree = "<group>"; };
-		7D29FA95E1AE2D917FB09994 /* Pods-小礼品.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-小礼品.release.xcconfig"; path = "Pods/Target Support Files/Pods-小礼品/Pods-小礼品.release.xcconfig"; sourceTree = "<group>"; };
 		850843CF1EAF45E5001BEEF4 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		850843D11EAF4633001BEEF4 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		850843D31EAF6101001BEEF4 /* Gift_Swift_Bridging_Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Gift_Swift_Bridging_Header.h; sourceTree = "<group>"; };
@@ -727,7 +723,6 @@
 		85E389651EA64A5A008BA044 /* strategy_9.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = strategy_9.jpg; sourceTree = "<group>"; };
 		8D7105EDE7797B9B6028F37B /* Pods_FuwanUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FuwanUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		90D93438A1D0D71A5B9B4A23 /* Pods____UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods____UITests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		914BEA3EF1834E51179853BE /* Pods-小礼品Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-小礼品Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-小礼品Tests/Pods-小礼品Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		9A2BF0D61F43023200561ADB /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		9A2BF0D81F4311FA00561ADB /* WKWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WKWebViewController.swift; sourceTree = "<group>"; };
 		9A2BF1031F46E25100561ADB /* Extenstions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extenstions.swift; sourceTree = "<group>"; };
@@ -742,8 +737,6 @@
 		B6D449DFF3C3CDA69229F438 /* Pods-Fuwan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fuwan.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fuwan/Pods-Fuwan.debug.xcconfig"; sourceTree = "<group>"; };
 		BF7F90BACE8E62E1B1441E1B /* Pods-Fuwan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fuwan.release.xcconfig"; path = "Pods/Target Support Files/Pods-Fuwan/Pods-Fuwan.release.xcconfig"; sourceTree = "<group>"; };
 		D51C941E6FEB821C8E2512BD /* Pods-FuwanUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FuwanUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FuwanUITests/Pods-FuwanUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		D856249A59D5ACBE0F9F3E13 /* Pods-小礼品.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-小礼品.debug.xcconfig"; path = "Pods/Target Support Files/Pods-小礼品/Pods-小礼品.debug.xcconfig"; sourceTree = "<group>"; };
-		F5C89778817AD80C06808E21 /* Pods-小礼品Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-小礼品Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-小礼品Tests/Pods-小礼品Tests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -763,7 +756,6 @@
 				850843D71EAF70F1001BEEF4 /* libz.tbd in Frameworks */,
 				9A2BF10B1F46F63000561ADB /* libBPush.a in Frameworks */,
 				850843D51EAF70E1001BEEF4 /* libicucore.tbd in Frameworks */,
-				B2694B13F41F18607078E414 /* Pods____.framework in Frameworks */,
 				6BD634553520A797C0D04C6E /* Pods_Fuwan.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1523,12 +1515,6 @@
 		89E94A58557AB49E4DEFDFED /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				D856249A59D5ACBE0F9F3E13 /* Pods-小礼品.debug.xcconfig */,
-				7D29FA95E1AE2D917FB09994 /* Pods-小礼品.release.xcconfig */,
-				914BEA3EF1834E51179853BE /* Pods-小礼品Tests.debug.xcconfig */,
-				F5C89778817AD80C06808E21 /* Pods-小礼品Tests.release.xcconfig */,
-				7A67C7E369D2A666ED2052C8 /* Pods-小礼品UITests.debug.xcconfig */,
-				3DDD3FBFD083EB882FBF021E /* Pods-小礼品UITests.release.xcconfig */,
 				B6D449DFF3C3CDA69229F438 /* Pods-Fuwan.debug.xcconfig */,
 				BF7F90BACE8E62E1B1441E1B /* Pods-Fuwan.release.xcconfig */,
 				9EB44B32340277C0647C8D52 /* Pods-FuwanTests.debug.xcconfig */,
