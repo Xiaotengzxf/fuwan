@@ -152,6 +152,7 @@ class WebViewController: UIViewController, WKScriptMessageHandler {
                         self.navigationController?.popViewController(animated: true)
                     }else if function == "openWindow" {
                         if let strUrl = body["parameters"], strUrl.hasPrefix("http") {
+                            print("跳转的url:\(strUrl)")
                             let webView = WebViewController(url: strUrl)
                             self.navigationController?.pushViewController(webView, animated: true)
                         }
@@ -174,11 +175,12 @@ class WebViewController: UIViewController, WKScriptMessageHandler {
                         }
                     }else if function == "openWindowSetting" {
                         if let strUrl = body["parameters"], strUrl.hasPrefix("http") {
+                            print("跳转的url:\(strUrl)")
                             let webView = WebViewController(url: strUrl)
                             self.navigationController?.pushViewController(webView, animated: true)
                         }
                     }else if function == "getVersion" {
-                        mWebView.evaluateJavaScript("showVersion(\"{versionCode:\"\(Bundle.main.infoDictionary!["CFBundleShortVersionString"])\",versionName:\"富玩\"}\")", completionHandler: { (result, error) in
+                        mWebView.evaluateJavaScript("showVersion(\"{versionCode:\"\(Bundle.main.infoDictionary!["CFBundleShortVersionString"])\",versionName:\"富玩\"}\");", completionHandler: { (result, error) in
                             
                         })
                     }else if function == "update" {

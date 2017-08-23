@@ -194,7 +194,7 @@ class LoginView: UIView {
         wechatButton.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
             make.top.equalTo(registerButton.snp.bottom).offset(margin * 3)
-            make.width.height.equalTo(margin*3.6)
+            make.width.height.equalTo(margin * 80)
         }
         
         sinaButton.snp.makeConstraints { (make) in

@@ -2,12 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "webo.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "webo@2x.png",
+      "filename" : "weibo.png",
       "scale" : "2x"
     },
     {
