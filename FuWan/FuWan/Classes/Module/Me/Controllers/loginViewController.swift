@@ -16,6 +16,9 @@ class loginViewController: UIViewController {
 
 //MARK: 懒加载
     lazy var mainView:LoginView = LoginView()
+    var openid = ""
+    var access_token = ""
+    var unionid = ""
 //MARK: 系统方法
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -129,10 +132,34 @@ extension loginViewController:LoginViewDelegate {
     }
     
     func SDKLoginHandle(_ state:SSDKResponseState,user:SSDKUser,type:String) {
-        //: 用户ID
-        let uid = user.uid ?? ""
-        //: token
+        
+        let openid = user.uid ?? ""
         let token = user.credential.token ?? ""
+        var parameters : [String : Any] = [:]
+        switch type {
+        case "qq":
+            parameters["qq_openid"] = openid
+            parameters["login_from"] = "qq_openid"
+        case "sina":
+            parameters["weibo_openid"] = openid
+            parameters["login_from"] = "weibo_openid"
+        default:
+            parameters["weixin_openid"] = openid
+            parameters["login_from"] = "weixin_openid"
+        }
+        parameters["imei"] = ""
+        parameters["token"] = token
+        parameters["device_type"] = "iOS"
+        parameters["ajax"] = "1"
+        parameters["push_appid"] = ""
+        parameters["push_userid"] = ""
+        parameters["push_channelid"] = ""
+        parameters["push_code"] = ""
+        
+        //: 用户ID
+        
+        //: token
+        
         //: 用户昵称
         let nickname = user.nickname ?? ""
         let say = user.aboutMe ?? ""
@@ -142,33 +169,31 @@ extension loginViewController:LoginViewDelegate {
         
         ProgressHUD.show(withStatus: "正在登陆")
        
-        AccountModel.thirdAccountLogin(type, openid: uid, token: token, nickname: nickname
-                                 , avatar: avatar ?? "", sex: sex, finished:{ (success, msg) -> Void in
-//: 采用的是别人的服务器，所以不做第三方真实登陆，自己的服务器真实登陆如下：
-//                if success {
-//                    ProgressHUD.dismiss()
-//                    
-//                }
-//                else {
-//                    ProgressHUD.showInfo(withStatus: msg)
-//                }
+        AccountModel.thirdAccountLogin(parameters, finished:{ (success, msg) -> Void in
                 
+            if success {
                 ProgressHUD.showInfo(withStatus: "登陆成功")
-                  
-                let parameters: [String : Any] = [
-                    "uid" : uid,
-                    "say" : say,
-                    "nickname" : nickname,
-                    "avatar" : avatar ?? "",
-                    "sex" : sex
-                ]
-                  
-                  let account = ExchangeToModel.model(withClassName: "AccountModel", withDictionary: parameters) as! AccountModel
-                 
-                  account.saveAccountInfo()
-                                    
-                  self.loginViewCloseButtonClick()
+                
+            }
+            
         })
+        
+    }
+    
+    // 获取
+    func getAccess_token(code : String) {
+        let urlPath = "https://api.weixin.qq.com/sns/oauth2/access_token?appid="
+            + WX_APP_ID
+            + "&secret="
+            + WX_APP_SECRET
+            + "&code="
+            + code
+            + "&grant_type=authorization_code"
+        NetworkTools.shared.get(urlPath, parameters: nil) { (isSuccess, result, error) in
+            if isSuccess {
+                
+            }
+        }
         
     }
     

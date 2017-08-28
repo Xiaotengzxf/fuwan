@@ -85,13 +85,13 @@ class LoginView: UIView {
     lazy var qqButton:UIButton = { () -> UIButton in
         let button = UIButton(type: .custom)
         button.tag = SocietyType.qq.rawValue
-        button.setImage(#imageLiteral(resourceName: "qq"), for: .normal)
+        button.setImage(UIImage(named: "qq"), for: .normal)
         return button
     }()
     
     lazy var qqLabel: UILabel = {
         let label = UILabel()
-        label.text = "QQ"
+        label.text = "QQ登录"
         label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = UIColor.black
         return label
@@ -100,13 +100,13 @@ class LoginView: UIView {
     lazy var sinaButton:UIButton = { () -> UIButton in
         let button = UIButton(type: .custom)
         button.tag = SocietyType.sina.rawValue
-        button.setImage(UIImage(named: "sina"), for: .normal)
+        button.setImage(UIImage(named: "webo"), for: .normal)
         return button
     }()
     
     lazy var sinaLabel: UILabel = {
         let label = UILabel()
-        label.text = "微博"
+        label.text = "微博登录"
         label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = UIColor.black
         return label
@@ -121,7 +121,7 @@ class LoginView: UIView {
     
     lazy var wechatLabel: UILabel = {
         let label = UILabel()
-        label.text = "微信"
+        label.text = "微信登录"
         label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = UIColor.black
         return label
@@ -221,17 +221,19 @@ class LoginView: UIView {
         wechatButton.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
             make.top.equalTo(registerButton.snp.bottom).offset(margin * 3)
-            make.width.height.equalTo(80)
+            make.width.height.equalTo(70)
         }
         
         sinaButton.snp.makeConstraints { (make) in
-            make.top.size.equalTo(wechatButton)
-            make.centerX.equalToSuperview().multipliedBy(0.5).offset(-margin)
+            make.centerY.equalTo(wechatButton)
+            make.centerX.equalToSuperview().multipliedBy(1.5).offset(margin)
+            make.width.height.equalTo(80)
         }
         
         qqButton.snp.makeConstraints { (make) in
-            make.top.size.equalTo(wechatButton)
-            make.centerX.equalToSuperview().multipliedBy(1.5).offset(margin)
+            make.centerY.equalTo(wechatButton)
+            make.centerX.equalToSuperview().multipliedBy(0.5).offset(-margin)
+            make.width.height.equalTo(80)
         }
         
         qqLabel.snp.makeConstraints { (make) in
@@ -245,8 +247,9 @@ class LoginView: UIView {
         }
         
         wechatLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(wechatButton.snp.bottom).offset(10)
-            make.centerX.equalTo(wechatButton.snp.centerX)
+            make.top.equalTo(wechatButton.snp.bottom).offset(15)
+            make.centerX.equalToSuperview()
+            
         }
         
     }

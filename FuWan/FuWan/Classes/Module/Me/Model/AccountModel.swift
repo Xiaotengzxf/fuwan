@@ -113,20 +113,7 @@ class AccountModel: NSObject,NSCoding {
 //MARK: 登陆相关
 extension AccountModel {
 
-    class func thirdAccountLogin(_ type: String, openid: String, token: String
-        , nickname: String, avatar: String, sex: Int
-        , finished: @escaping (_ success: Bool, _ tip: String) -> ()) {
-        
-        let parameters: [String : AnyObject] = [
-            "type" : type as AnyObject,
-            "identifier" : openid as AnyObject,
-            "token" : token as AnyObject,
-            "nickname" : nickname as AnyObject,
-            "avatar" : avatar as AnyObject,
-            "sex" : sex as AnyObject
-        ]
-        
-    
+    class func thirdAccountLogin(_ parameters: [String: Any]?, finished: @escaping (_ success: Bool, _ tip: String) -> ()) {
         
         NetworkTools.shared.get(LOGIN_URL, parameters: parameters) { (isSucess, result, error) in
             

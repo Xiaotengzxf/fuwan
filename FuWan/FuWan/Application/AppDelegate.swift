@@ -137,41 +137,11 @@ extension AppDelegate {
                 
             }
     }
-
-//MARK: 登陆业务逻辑
-    //: 新特性
-    func isNewFeatureVersion() -> Bool {
-        
-        let newVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"]
-            as! String
-        
-        
-        //: 旧版本到新版本为升序
-        guard let sanboxVersion = UserDefaults.standard.object(forKey: "APPVersion") as? String , sanboxVersion.compare(newVersion) != .orderedAscending else {
-            //: 跟新版本
-            UserDefaults.standard.set(newVersion, forKey: "APPVersion")
-            return true
-        }
-        
-        
-        return false
-    }
     
     func defaultRootViewController() -> UIViewController {
         
         return MainViewController()
-        //: 没有登陆跳转到系统主界面
-//        guard LSXUserAccountModel.isLogin() else {
-//            return MainViewController()
-//        }
-//
-//        //: 判断是否新版本
-//        if isNewFeatureVersion() {
-//            return LSXNewFeatureViewController()
-//        }
-//        
-//        //: 跳转到欢迎主界面
-//        return LSXWelcomeViewController()
+
     }
     
     func changeDefaultRootViewController(notification:Notification) {
@@ -191,6 +161,7 @@ extension AppDelegate {
         
         window?.rootViewController = controller
     }
+    
 }
 
 extension AppDelegate {
