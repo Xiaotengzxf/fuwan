@@ -54,6 +54,8 @@ extension NetworkTools {
     
         Alamofire.request(url, method: .get, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
             self.handle(response: response, finished: finished)
+        }.responseString { (response) in
+            print(response.result)
         }
     }
     

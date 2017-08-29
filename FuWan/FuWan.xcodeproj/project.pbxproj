@@ -352,6 +352,7 @@
 		9A2BF10A1F46F63000561ADB /* BPushCerResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9A2BF1071F46F63000561ADB /* BPushCerResource.bundle */; };
 		9A2BF10B1F46F63000561ADB /* libBPush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2BF1081F46F63000561ADB /* libBPush.a */; };
 		9A2BF10C1F46F63000561ADB /* test.caf in Resources */ = {isa = PBXBuildFile; fileRef = 9A2BF1091F46F63000561ADB /* test.caf */; };
+		9A2BF1791F55071500561ADB /* MerchantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A2BF1781F55071500561ADB /* MerchantViewController.swift */; };
 		D1FF5F862CB714AA62DB17C7 /* Pods____Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D016F7EF5B21BD9D070B068 /* Pods____Tests.framework */; };
 		E78210B38EE9ECAC721CBDAE /* Pods____UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90D93438A1D0D71A5B9B4A23 /* Pods____UITests.framework */; };
 /* End PBXBuildFile section */
@@ -731,6 +732,7 @@
 		9A2BF1081F46F63000561ADB /* libBPush.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBPush.a; sourceTree = "<group>"; };
 		9A2BF1091F46F63000561ADB /* test.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.caf; sourceTree = "<group>"; };
 		9A2BF10D1F46F6E700561ADB /* Fuwan.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Fuwan.entitlements; path = Fuwan/Fuwan.entitlements; sourceTree = "<group>"; };
+		9A2BF1781F55071500561ADB /* MerchantViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MerchantViewController.swift; sourceTree = "<group>"; };
 		9EB44B32340277C0647C8D52 /* Pods-FuwanTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FuwanTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FuwanTests/Pods-FuwanTests.debug.xcconfig"; sourceTree = "<group>"; };
 		AF2DC5C99C772F02DD6074DA /* Pods____.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods____.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2741B15182C4867D5306A02 /* Pods-FuwanTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FuwanTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FuwanTests/Pods-FuwanTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -843,6 +845,7 @@
 		850843FA1EAF914B001BEEF4 /* Module */ = {
 			isa = PBXGroup;
 			children = (
+				9A2BF1771F5506E100561ADB /* Merchant */,
 				850843FB1EAF91DE001BEEF4 /* Base */,
 				850844281EAF91DE001BEEF4 /* Classify */,
 				850844431EAF91DE001BEEF4 /* Home */,
@@ -1536,6 +1539,14 @@
 			name = Baidu;
 			sourceTree = "<group>";
 		};
+		9A2BF1771F5506E100561ADB /* Merchant */ = {
+			isa = PBXGroup;
+			children = (
+				9A2BF1781F55071500561ADB /* MerchantViewController.swift */,
+			);
+			name = Merchant;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2133,6 +2144,7 @@
 				850844601EAF91DE001BEEF4 /* BannerCarouselView.swift in Sources */,
 				8508448E1EAF91DE001BEEF4 /* SingleGiftCellViewModel.swift in Sources */,
 				9A2BF0D91F4311FA00561ADB /* WKWebViewController.swift in Sources */,
+				9A2BF1791F55071500561ADB /* MerchantViewController.swift in Sources */,
 				850844961EAF91DE001BEEF4 /* StrategyColumnSubCellViewModel.swift in Sources */,
 				8508447E1EAF91DE001BEEF4 /* SearchViewController.swift in Sources */,
 				850844AA1EAF91DE001BEEF4 /* MeHeadFooterView.swift in Sources */,

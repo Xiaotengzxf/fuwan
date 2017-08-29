@@ -91,7 +91,7 @@ extension loginViewController:LoginViewDelegate {
                     account.saveAccountInfo()
                     
                     NotificationCenter.default.post(name: Notification.Name("Me"), object: 1)
-                    
+                    NotificationCenter.default.post(name: Notification.Name("tabbar"), object: 1)
                     self.navigationController?.popViewController(animated: true)
                 }
             }else{
@@ -151,29 +151,25 @@ extension loginViewController:LoginViewDelegate {
         parameters["token"] = token
         parameters["device_type"] = "iOS"
         parameters["ajax"] = "1"
-        parameters["push_appid"] = ""
-        parameters["push_userid"] = ""
-        parameters["push_channelid"] = ""
-        parameters["push_code"] = ""
-        
-        //: 用户ID
-        
-        //: token
-        
-        //: 用户昵称
-        let nickname = user.nickname ?? ""
-        let say = user.aboutMe ?? ""
-        
-        let avatar = type == "weibo" ? (user.rawData["avatar_hd"] != nil ? user.rawData["avatar_hd"] as? String : user.icon) : (user.rawData["figureurl_qq_2"] != nil ? user.rawData["figureurl_qq_2"] as? String : user.icon)
-        let sex = user.gender.rawValue == 0 ? 1 : 0
+        parameters["push_appid"] = BPush.getAppId()
+        parameters["push_userid"] = BPush.getUserId()
+        parameters["push_channelid"] = BPush.getChannelId()
+        parameters["push_code"] = "0"
         
         ProgressHUD.show(withStatus: "正在登陆")
        
         AccountModel.thirdAccountLogin(parameters, finished:{ (success, msg) -> Void in
-                
+            
+            ProgressHUD.dismiss()
+            
             if success {
                 ProgressHUD.showInfo(withStatus: "登陆成功")
                 
+                NotificationCenter.default.post(name: Notification.Name("Me"), object: 1)
+                self.navigationController?.popViewController(animated: true)
+                
+            }else{
+                ProgressHUD.showInfo(withStatus: msg)
             }
             
         })

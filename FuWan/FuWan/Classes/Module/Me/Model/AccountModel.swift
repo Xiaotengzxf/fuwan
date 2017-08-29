@@ -57,6 +57,9 @@ class AccountModel: NSObject,NSCoding {
         } catch {
             QL4("退出异常")
         }
+        
+        NotificationCenter.default.post(name: Notification.Name("tabbar"), object: 2)
+        
     }
     
     func saveAccountInfo() {
@@ -115,7 +118,7 @@ extension AccountModel {
 
     class func thirdAccountLogin(_ parameters: [String: Any]?, finished: @escaping (_ success: Bool, _ tip: String) -> ()) {
         
-        NetworkTools.shared.get(LOGIN_URL, parameters: parameters) { (isSucess, result, error) in
+        NetworkTools.shared.post(LOGIN_URL, parameters: parameters) { (isSucess, result, error) in
             
             guard let result = result else {
                 finished(false, "您的网络不给力哦")

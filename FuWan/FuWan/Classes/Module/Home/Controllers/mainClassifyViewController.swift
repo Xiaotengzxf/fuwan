@@ -12,7 +12,7 @@ import SwiftyJSON
 
 let  bannerCarouselViewHeight = 160
 
-class mainClassifyViewController: BaseClassifyViewController, TopicCollectionViewDelegate {
+class mainClassifyViewController: BaseClassifyViewController, TopicCollectionViewDelegate, BannerCarouselViewDelegate {
 
 //MARK: 懒加载
     lazy var headView:UIView = UIView()
@@ -114,6 +114,7 @@ class mainClassifyViewController: BaseClassifyViewController, TopicCollectionVie
         headView.addSubview(topicView)
         headView.addSubview(labelTip)
         topicView.topicDelegate = self
+        bannerCarousel.viewDelegate = self
         tableView.tableHeaderView = headView
         
     }
@@ -133,6 +134,24 @@ class mainClassifyViewController: BaseClassifyViewController, TopicCollectionVie
             }
         }
         
+    }
+    
+    func selectRow(row : Int, json: JSON) {
+        if let url = json["url"].string, url.characters.count > 0 {
+            self.navigationController?.setNavigationBarHidden(false, animated: false)
+            let webView = WebViewController(url: url)
+            self.navigationController?.pushViewController(webView, animated: true)
+            return
+        }
+//        if let modelId = json["modelid"].string {
+//            if modelId == "0" {
+//                let webView = WebViewController(url: CATEGORY_URL)
+//                self.navigationController?.pushViewController(webView, animated: true)
+//            }else {
+//                let webView = WebViewController(url: MODULE_URL + modelId)
+//                self.navigationController?.pushViewController(webView, animated: true)
+//            }
+//        }
     }
     
 }

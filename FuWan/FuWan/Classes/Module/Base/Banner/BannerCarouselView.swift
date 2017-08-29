@@ -18,6 +18,8 @@ let pageCotrolYOffSetOfBottom:CGFloat = 12.0
 
 class BannerCarouselView: UICollectionView {
     
+    var viewDelegate: BannerCarouselViewDelegate?
+    
     var arrModel : [JSON] = []
 //MARK: 属性
     fileprivate let identifier = "BannerCarouselCell"
@@ -56,7 +58,7 @@ class BannerCarouselView: UICollectionView {
         
         isPagingEnabled = true
         delegate = self
-        dataSource = self;
+        dataSource = self
         
         register(BannerCarouselViewCell.self, forCellWithReuseIdentifier: identifier)
         
@@ -87,8 +89,8 @@ class BannerCarouselView: UICollectionView {
     
     //: 结束自动轮播
     func stopAutoCarousel() {
-        if self.timer!.isValid {
-            self.timer!.invalidate()
+        if self.timer != nil && self.timer!.isValid {
+            self.timer?.invalidate()
         }
         
         self.timer = nil
@@ -127,7 +129,8 @@ extension BannerCarouselView:UICollectionViewDelegate,UICollectionViewDataSource
     
     //: 点击
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        QL2("点击了cell")
+        collectionView.deselectItem(at: indexPath, animated: true)
+        viewDelegate?.selectRow(row: indexPath.row % arrModel.count, json: arrModel[indexPath.row % arrModel.count])
     }
     
 }
@@ -161,4 +164,8 @@ class BannerCaruselLayout:UICollectionViewFlowLayout {
         scrollDirection = .horizontal
         itemSize = CGSize(width: collectionView!.bounds.width, height: cellHeight)
     }
+}
+
+protocol BannerCarouselViewDelegate {
+    func selectRow(row : Int, json: JSON)
 }
