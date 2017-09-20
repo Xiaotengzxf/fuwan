@@ -132,8 +132,8 @@ class WebViewController: UIViewController, WKScriptMessageHandler {
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         if message.name == "jshook" {
-            if let body = message.body as? [String : String] {
-                if let function = body["function"] {
+            if let body = message.body as? [String : Any] {
+                if let function = body["function"] as? String {
                     if function == "login" {
                         if let _ = AccountModel.shareAccount()?.token() {
                             
@@ -151,42 +151,44 @@ class WebViewController: UIViewController, WKScriptMessageHandler {
                     }else if function == "closeWindow" {
                         self.navigationController?.popViewController(animated: true)
                     }else if function == "openWindow" {
-                        if let strUrl = body["parameters"], strUrl.hasPrefix("http") {
+                        if let strUrl = body["parameters"] as? String, strUrl.hasPrefix("http") {
                             print("跳转的url:\(strUrl)")
                             let webView = WebViewController(url: strUrl)
                             self.navigationController?.pushViewController(webView, animated: true)
                         }
                     }else if function == "copy" {
-                        if let strContent = body["parameters"] {
+                        if let strContent = body["parameters"] as? String {
                             let paste = UIPasteboard.general
                             paste.string = strContent
                         }
                     }else if function == "Alert" {
-                        if let strContent = body["parameters"] {
+                        if let strContent = body["parameters"] as? String {
                             self.showAlertView(message: strContent)
                         }
                     }else if function == "Toast" {
-                        if let strContent = body["parameters"] {
+                        if let strContent = body["parameters"] as? String {
                             Toast(text: strContent).show()
                         }
                     }else if function == "forAreaResult" {
-                        if let strContent = body["parameters"] {
+                        if let strContent = body["parameters"] as? String {
                             Toast(text: strContent).show()
                         }
                     }else if function == "openWindowSetting" {
-                        if let strUrl = body["parameters"], strUrl.hasPrefix("http") {
+                        if let strUrl = body["parameters"] as? String, strUrl.hasPrefix("http") {
                             print("跳转的url:\(strUrl)")
                             let webView = WebViewController(url: strUrl)
                             self.navigationController?.pushViewController(webView, animated: true)
                         }
                     }else if function == "getVersion" {
-                        mWebView.evaluateJavaScript("showVersion(\"{versionCode:\"\(Bundle.main.infoDictionary!["CFBundleShortVersionString"])\",versionName:\"富玩\"}\");", completionHandler: { (result, error) in
+                        mWebView.evaluateJavaScript("showVersion(\"{versionCode:\"\(Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String ?? "")\",versionName:\"富玩\"}\");", completionHandler: { (result, error) in
                             
                         })
                     }else if function == "update" {
                         Toast(text: "当前版本已是最新版").show()
                     }else if function == "setPageSetting" {
                         
+                    }else if function == "shareWxTimeline" {
+                        // title img url desc
                     }
                 }
             }
