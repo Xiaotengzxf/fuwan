@@ -189,6 +189,117 @@ class WebViewController: UIViewController, WKScriptMessageHandler {
                         
                     }else if function == "shareWxTimeline" {
                         // title img url desc
+                        if let dicContent = body["parameters"] as? [String: String] {
+                            let shareParames = NSMutableDictionary()
+                            shareParames.ssdkSetupShareParams(byText: dicContent["desc"]!,
+                                                              images : UIImage(named: "logo1"),
+                                                              url : URL(string: dicContent["url"]!),
+                                                              title : dicContent["title"]!,
+                                                              type : SSDKContentType.webPage)
+                            ShareSDK.share(.subTypeWechatTimeline, parameters: shareParames, onStateChanged: { (state, value, entity, error) in
+                                switch state{
+                                    
+                                case SSDKResponseState.success:
+                                    Toast(text: "分享成功").show()
+                                case SSDKResponseState.fail:
+                                    Toast(text: "分享失败").show()
+                                case SSDKResponseState.cancel:
+                                    Toast(text: "取消了分享").show()
+                                default:
+                                    break
+                                }
+                            })
+                        }
+                    }else if function == "shareWxFriend" {
+                        if let dicContent = body["parameters"] as? [String: String] {
+                            let shareParames = NSMutableDictionary()
+                            shareParames.ssdkSetupShareParams(byText: dicContent["desc"]!,
+                                                              images : UIImage(named: "logo1"),
+                            url : URL(string: dicContent["url"]!),
+                            title : dicContent["title"]!,
+                            type : SSDKContentType.webPage)
+                            ShareSDK.share(.subTypeWechatSession, parameters: shareParames, onStateChanged: { (state, value, entity, error) in
+                                switch state{
+                                    
+                                case SSDKResponseState.success:
+                                    Toast(text: "分享成功").show()
+                                case SSDKResponseState.fail:
+                                    Toast(text: "分享失败").show()
+                                case SSDKResponseState.cancel:
+                                    Toast(text: "取消了分享").show()
+                                default:
+                                    break
+                                }
+                            })
+                        }
+                    }else if function == "shareSinaWb" {
+                        if let dicContent = body["parameters"] as? [String: String] {
+                            let shareParames = NSMutableDictionary()
+                            shareParames.ssdkSetupShareParams(byText: dicContent["desc"]!,
+                                                              images : UIImage(named: "logo1"),
+                                                              url : URL(string: dicContent["url"]!),
+                                                              title : dicContent["title"]!,
+                                                              type : SSDKContentType.webPage)
+                            ShareSDK.share(.typeSinaWeibo, parameters: shareParames, onStateChanged: { (state, value, entity, error) in
+                                switch state{
+                                    
+                                case SSDKResponseState.success:
+                                    Toast(text: "分享成功").show()
+                                case SSDKResponseState.fail:
+                                    Toast(text: "分享失败").show()
+                                case SSDKResponseState.cancel:
+                                    Toast(text: "取消了分享").show()
+                                default:
+                                    break
+                                }
+                            })
+                        }
+                    }else if function == "shareQq" {
+                        if let dicContent = body["parameters"] as? [String: String] {
+                            let shareParames = NSMutableDictionary()
+                            shareParames.ssdkSetupShareParams(byText: dicContent["desc"]!,
+                                                              images : UIImage(named: "logo1"),
+                                                              url : URL(string: dicContent["url"]!),
+                                                              title : dicContent["title"]!,
+                                                              type : SSDKContentType.webPage)
+                            ShareSDK.share(.subTypeQQFriend, parameters: shareParames, onStateChanged: { (state, value, entity, error) in
+                                switch state{
+                                    
+                                case SSDKResponseState.success:
+                                    Toast(text: "分享成功").show()
+                                case SSDKResponseState.fail:
+                                    Toast(text: "分享失败").show()
+                                case SSDKResponseState.cancel:
+                                    Toast(text: "取消了分享").show()
+                                default:
+                                    break
+                                }
+                            })
+                        }
+                    }else if function == "shareQzone" {
+                        if let dicContent = body["parameters"] as? [String: String] {
+                            let shareParames = NSMutableDictionary()
+                            shareParames.ssdkSetupShareParams(byText: dicContent["desc"]!,
+                                                              images : UIImage(named: "logo1"),
+                                                              url : URL(string: dicContent["url"]!),
+                                                              title : dicContent["title"]!,
+                                                              type : SSDKContentType.webPage)
+                            ShareSDK.share(.subTypeQZone, parameters: shareParames, onStateChanged: { (state, value, entity, error) in
+                                switch state{
+                                    
+                                case SSDKResponseState.success:
+                                    Toast(text: "分享成功").show()
+                                case SSDKResponseState.fail:
+                                    Toast(text: "分享失败").show()
+                                case SSDKResponseState.cancel:
+                                    Toast(text: "取消了分享").show()
+                                default:
+                                    break
+                                }
+                            })
+                        }
+                    }else if function == "getLocaction" {
+                        
                     }
                 }
             }
