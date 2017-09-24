@@ -12,7 +12,7 @@ import SwiftyJSON
 
 let  bannerCarouselViewHeight = 160
 
-class mainClassifyViewController: BaseClassifyViewController, TopicCollectionViewDelegate, BannerCarouselViewDelegate {
+class mainClassifyViewController: BaseClassifyViewController, TopicCollectionViewDelegate, BannerCarouselViewDelegate, UISearchBarDelegate {
 
 //MARK: 懒加载
     lazy var headView:UIView = UIView()
@@ -26,6 +26,31 @@ class mainClassifyViewController: BaseClassifyViewController, TopicCollectionVie
         label.text = "-- 猜你喜欢 --"
         label.textAlignment = .center
         return label
+    }()
+    lazy var btnCity: UIButton = {
+        let button = UIButton(type: UIButtonType.custom)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.setTitle("郑州", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        button.addTarget(self, action: #selector(self.chooseCity(_:)), for: .touchUpInside)
+        return button
+    }()
+    
+    lazy var search: UISearchBar = {
+        let searchbar = UISearchBar()
+        searchbar.placeholder = "请输入您想要搜索的内容"
+        searchbar.backgroundImage = UIImage()
+        searchbar.backgroundColor = UIColor.white
+        searchbar.layer.cornerRadius = 15
+        searchbar.delegate = self
+        return searchbar
+    }()
+    
+    lazy var btnChat: UIButton = {
+        let button = UIButton(type: UIButtonType.custom)
+        button.setImage(UIImage(named: "chat"), for: .normal)
+        button.addTarget(self, action: #selector(self.goToChat(_:)), for: .touchUpInside)
+        return button
     }()
 //MARK: 系统方法
     override func viewDidLoad() {
@@ -91,6 +116,27 @@ class mainClassifyViewController: BaseClassifyViewController, TopicCollectionVie
             make.top.equalTo(topicView.snp.bottom).offset(5)
         }
         
+        btnCity.snp.makeConstraints { (make) in
+            make.height.equalTo(30)
+            make.left.equalTo(5)
+            make.top.equalTo(10)
+            make.width.equalTo(50)
+        }
+        
+        btnChat.snp.makeConstraints { (make) in
+            make.height.equalTo(30)
+            make.right.equalTo(-5)
+            make.top.equalTo(10)
+            make.width.equalTo(30)
+        }
+        
+        search.snp.makeConstraints { (make) in
+            make.left.equalTo(btnCity.snp.right).offset(5)
+            make.right.equalTo(btnChat.snp.left).offset(-5)
+            make.height.equalTo(30)
+            make.top.equalTo(10)
+        }
+        
         tableView.tableHeaderView = headView
         headView.backgroundColor = UIColor(red: 240/255.0, green: 240/255.0, blue: 240/255.0, alpha: 1)
         tableView.tableHeaderView?.bounds = CGRect(x: 0, y: 0, width: ScreenWidth, height: CGFloat(bannerCarouselViewHeight + 70) + CGFloat(ScreenWidth * 2 / 5 + 2))
@@ -116,6 +162,16 @@ class mainClassifyViewController: BaseClassifyViewController, TopicCollectionVie
         topicView.topicDelegate = self
         bannerCarousel.viewDelegate = self
         tableView.tableHeaderView = headView
+        headView.addSubview(btnCity)
+        headView.addSubview(search)
+        headView.addSubview(btnChat)
+    }
+    
+    func chooseCity(_ sender: Any) {
+        
+    }
+    
+    func goToChat(_ sender: Any) {
         
     }
     
@@ -152,6 +208,14 @@ class mainClassifyViewController: BaseClassifyViewController, TopicCollectionVie
 //                self.navigationController?.pushViewController(webView, animated: true)
 //            }
 //        }
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
     }
     
 }
