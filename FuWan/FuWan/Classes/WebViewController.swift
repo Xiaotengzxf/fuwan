@@ -239,7 +239,7 @@ class WebViewController: UIViewController, WKScriptMessageHandler {
                                                               images : UIImage(named: "logo1"),
                                                               url : URL(string: dicContent["url"]!),
                                                               title : dicContent["title"]!,
-                                                              type : SSDKContentType.webPage)
+                                                              type : SSDKContentType.auto)
                             ShareSDK.share(.typeSinaWeibo, parameters: shareParames, onStateChanged: { (state, value, entity, error) in
                                 switch state{
                                     
@@ -261,7 +261,7 @@ class WebViewController: UIViewController, WKScriptMessageHandler {
                                                               images : UIImage(named: "logo1"),
                                                               url : URL(string: dicContent["url"]!),
                                                               title : dicContent["title"]!,
-                                                              type : SSDKContentType.webPage)
+                                                              type : SSDKContentType.auto)
                             ShareSDK.share(.subTypeQQFriend, parameters: shareParames, onStateChanged: { (state, value, entity, error) in
                                 switch state{
                                     
@@ -283,7 +283,7 @@ class WebViewController: UIViewController, WKScriptMessageHandler {
                                                               images : UIImage(named: "logo1"),
                                                               url : URL(string: dicContent["url"]!),
                                                               title : dicContent["title"]!,
-                                                              type : SSDKContentType.webPage)
+                                                              type : SSDKContentType.auto)
                             ShareSDK.share(.subTypeQZone, parameters: shareParames, onStateChanged: { (state, value, entity, error) in
                                 switch state{
                                     

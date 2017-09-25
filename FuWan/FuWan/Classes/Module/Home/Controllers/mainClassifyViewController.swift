@@ -12,7 +12,7 @@ import SwiftyJSON
 
 let  bannerCarouselViewHeight = 160
 
-class mainClassifyViewController: BaseClassifyViewController, TopicCollectionViewDelegate, BannerCarouselViewDelegate, UISearchBarDelegate {
+class mainClassifyViewController: BaseClassifyViewController, TopicCollectionViewDelegate, BannerCarouselViewDelegate, UISearchBarDelegate, BMKLocationServiceDelegate {
 
 //MARK: 懒加载
     lazy var headView:UIView = UIView()
@@ -52,6 +52,8 @@ class mainClassifyViewController: BaseClassifyViewController, TopicCollectionVie
         button.addTarget(self, action: #selector(self.goToChat(_:)), for: .touchUpInside)
         return button
     }()
+    
+    var _locService : BMKLocationService!
 //MARK: 系统方法
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,6 +84,10 @@ class mainClassifyViewController: BaseClassifyViewController, TopicCollectionVie
             }
             
         }
+        
+        _locService = BMKLocationService()
+        _locService.delegate = self
+        _locService.startUserLocationService()
         
     }
 
@@ -119,14 +125,14 @@ class mainClassifyViewController: BaseClassifyViewController, TopicCollectionVie
         btnCity.snp.makeConstraints { (make) in
             make.height.equalTo(30)
             make.left.equalTo(5)
-            make.top.equalTo(10)
+            make.top.equalTo(15)
             make.width.equalTo(50)
         }
         
         btnChat.snp.makeConstraints { (make) in
             make.height.equalTo(30)
             make.right.equalTo(-5)
-            make.top.equalTo(10)
+            make.top.equalTo(15)
             make.width.equalTo(30)
         }
         
@@ -134,7 +140,7 @@ class mainClassifyViewController: BaseClassifyViewController, TopicCollectionVie
             make.left.equalTo(btnCity.snp.right).offset(5)
             make.right.equalTo(btnChat.snp.left).offset(-5)
             make.height.equalTo(30)
-            make.top.equalTo(10)
+            make.top.equalTo(15)
         }
         
         tableView.tableHeaderView = headView
@@ -216,6 +222,15 @@ class mainClassifyViewController: BaseClassifyViewController, TopicCollectionVie
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
+    }
+    
+    func didUpdate(_ userLocation: BMKUserLocation!) {
+        var loc : [String: String] = [:]
+        loc["time"] = userLocation.location.timestamp.ToStringInfo()
+    }
+    
+    func didUpdateUserHeading(_ userLocation: BMKUserLocation!) {
+        
     }
     
 }

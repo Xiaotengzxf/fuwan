@@ -353,6 +353,15 @@
 		9A2BF10B1F46F63000561ADB /* libBPush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2BF1081F46F63000561ADB /* libBPush.a */; };
 		9A2BF10C1F46F63000561ADB /* test.caf in Resources */ = {isa = PBXBuildFile; fileRef = 9A2BF1091F46F63000561ADB /* test.caf */; };
 		9A2BF1791F55071500561ADB /* MerchantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A2BF1781F55071500561ADB /* MerchantViewController.swift */; };
+		9A53DAEA1F7912F600D2C0B9 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A53DAE91F7912E500D2C0B9 /* AlipaySDK.framework */; };
+		9A53DAEC1F79131B00D2C0B9 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A53DAEB1F79131A00D2C0B9 /* libc++.tbd */; };
+		9A53DAEE1F79132A00D2C0B9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A53DAED1F79132A00D2C0B9 /* QuartzCore.framework */; };
+		9A53DAF01F79133800D2C0B9 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A53DAEF1F79133700D2C0B9 /* CoreText.framework */; };
+		9A53DAF21F79134A00D2C0B9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A53DAF11F79134A00D2C0B9 /* CoreGraphics.framework */; };
+		9A53DAF41F79135600D2C0B9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A53DAF31F79135600D2C0B9 /* UIKit.framework */; };
+		9A53DAF61F79136000D2C0B9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A53DAF51F79136000D2C0B9 /* Foundation.framework */; };
+		9A53DAF81F79136A00D2C0B9 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A53DAF71F79136900D2C0B9 /* CFNetwork.framework */; };
+		9A53DAFA1F79137300D2C0B9 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A53DAF91F79137300D2C0B9 /* CoreMotion.framework */; };
 		D1FF5F862CB714AA62DB17C7 /* Pods____Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D016F7EF5B21BD9D070B068 /* Pods____Tests.framework */; };
 		E78210B38EE9ECAC721CBDAE /* Pods____UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90D93438A1D0D71A5B9B4A23 /* Pods____UITests.framework */; };
 /* End PBXBuildFile section */
@@ -733,6 +742,16 @@
 		9A2BF1091F46F63000561ADB /* test.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.caf; sourceTree = "<group>"; };
 		9A2BF10D1F46F6E700561ADB /* Fuwan.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Fuwan.entitlements; path = Fuwan/Fuwan.entitlements; sourceTree = "<group>"; };
 		9A2BF1781F55071500561ADB /* MerchantViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MerchantViewController.swift; sourceTree = "<group>"; };
+		9A53DAE81F7912D400D2C0B9 /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = SOURCE_ROOT; };
+		9A53DAE91F7912E500D2C0B9 /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
+		9A53DAEB1F79131A00D2C0B9 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		9A53DAED1F79132A00D2C0B9 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		9A53DAEF1F79133700D2C0B9 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		9A53DAF11F79134A00D2C0B9 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		9A53DAF31F79135600D2C0B9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		9A53DAF51F79136000D2C0B9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		9A53DAF71F79136900D2C0B9 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		9A53DAF91F79137300D2C0B9 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		9EB44B32340277C0647C8D52 /* Pods-FuwanTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FuwanTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FuwanTests/Pods-FuwanTests.debug.xcconfig"; sourceTree = "<group>"; };
 		AF2DC5C99C772F02DD6074DA /* Pods____.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods____.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2741B15182C4867D5306A02 /* Pods-FuwanTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FuwanTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FuwanTests/Pods-FuwanTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -746,12 +765,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A53DAFA1F79137300D2C0B9 /* CoreMotion.framework in Frameworks */,
+				9A53DAF81F79136A00D2C0B9 /* CFNetwork.framework in Frameworks */,
+				9A53DAF61F79136000D2C0B9 /* Foundation.framework in Frameworks */,
+				9A53DAF41F79135600D2C0B9 /* UIKit.framework in Frameworks */,
+				9A53DAF21F79134A00D2C0B9 /* CoreGraphics.framework in Frameworks */,
+				9A53DAF01F79133800D2C0B9 /* CoreText.framework in Frameworks */,
+				9A53DAEE1F79132A00D2C0B9 /* QuartzCore.framework in Frameworks */,
+				9A53DAEC1F79131B00D2C0B9 /* libc++.tbd in Frameworks */,
 				857A3A3F1EB3A328000A26DB /* CoreLocation.framework in Frameworks */,
 				852E2B551EB0C0520065F5D0 /* AdSupport.framework in Frameworks */,
 				852E2B531EB0C0410065F5D0 /* CoreTelephony.framework in Frameworks */,
 				852E2B511EB0C0320065F5D0 /* SystemConfiguration.framework in Frameworks */,
 				850843E11EAF71A1001BEEF4 /* MessageUI.framework in Frameworks */,
 				850843DF1EAF7184001BEEF4 /* libsqlite3.tbd in Frameworks */,
+				9A53DAEA1F7912F600D2C0B9 /* AlipaySDK.framework in Frameworks */,
 				850843DD1EAF716E001BEEF4 /* ImageIO.framework in Frameworks */,
 				850843DB1EAF710F001BEEF4 /* JavaScriptCore.framework in Frameworks */,
 				850843D91EAF7101001BEEF4 /* libstdc++.tbd in Frameworks */,
@@ -786,6 +814,15 @@
 		73C813EBE5EB424FB131B6FE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9A53DAF91F79137300D2C0B9 /* CoreMotion.framework */,
+				9A53DAF71F79136900D2C0B9 /* CFNetwork.framework */,
+				9A53DAF51F79136000D2C0B9 /* Foundation.framework */,
+				9A53DAF31F79135600D2C0B9 /* UIKit.framework */,
+				9A53DAF11F79134A00D2C0B9 /* CoreGraphics.framework */,
+				9A53DAEF1F79133700D2C0B9 /* CoreText.framework */,
+				9A53DAED1F79132A00D2C0B9 /* QuartzCore.framework */,
+				9A53DAEB1F79131A00D2C0B9 /* libc++.tbd */,
+				9A53DAE91F7912E500D2C0B9 /* AlipaySDK.framework */,
 				857A3A3E1EB3A328000A26DB /* CoreLocation.framework */,
 				852E2B541EB0C0520065F5D0 /* AdSupport.framework */,
 				852E2B521EB0C0410065F5D0 /* CoreTelephony.framework */,
@@ -810,9 +847,9 @@
 		850843CE1EAF459C001BEEF4 /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				850843D31EAF6101001BEEF4 /* Gift_Swift_Bridging_Header.h */,
 				850843CF1EAF45E5001BEEF4 /* AppDelegate.swift */,
 				850843D11EAF4633001BEEF4 /* Config.swift */,
-				850843D31EAF6101001BEEF4 /* Gift_Swift_Bridging_Header.h */,
 				9A2BF1031F46E25100561ADB /* Extenstions.swift */,
 			);
 			path = Application;
@@ -1442,6 +1479,7 @@
 				85E388ED1EA12760008BA044 /* Assets.xcassets */,
 				85E388EF1EA12760008BA044 /* LaunchScreen.storyboard */,
 				85E388F21EA12760008BA044 /* Info.plist */,
+				9A53DAE81F7912D400D2C0B9 /* AlipaySDK.bundle */,
 			);
 			path = FuWan;
 			sourceTree = "<group>";
@@ -1624,6 +1662,7 @@
 				TargetAttributes = {
 					85E388E21EA12760008BA044 = {
 						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = 7B33XM87CQ;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -1943,9 +1982,30 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Fuwan/Pods-Fuwan-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/LSXPropertyTool/LSXPropertyTool.framework",
+				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
+				"${BUILT_PRODUCTS_DIR}/QorumLogs/QorumLogs.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/Toaster/Toaster.framework",
+				"${BUILT_PRODUCTS_DIR}/WebViewBridge.Swift/WebViewBridge_Swift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LSXPropertyTool.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QorumLogs.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toaster.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WebViewBridge_Swift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1958,13 +2018,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FuwanUITests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		AD10674236BEEAAD363AD5C6 /* [CP] Copy Pods Resources */ = {
@@ -1973,9 +2036,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Fuwan/Pods-Fuwan-resources.sh",
+				"${PODS_ROOT}/BaiduMapKit/BaiduMapKit/BaiduMapAPI_Map.framework/Resources/mapapi.bundle",
+				"${PODS_ROOT}/ShareSDK3/ShareSDK/Support/Required/ShareSDK.bundle",
+				"${PODS_ROOT}/ShareSDK3/ShareSDK/Support/PlatformSDK/QQSDK/TencentOpenApi_IOS_Bundle.bundle",
+				"${PODS_ROOT}/ShareSDK3/ShareSDK/Support/PlatformSDK/SinaWeiboSDK/WeiboSDK.bundle",
+				"${PODS_ROOT}/ShareSDK3/ShareSDK/Support/Optional/ShareSDKUI.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1988,13 +2058,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Fuwan-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D59665EE74DF8825B2B7156C /* [CP] Embed Pods Frameworks */ = {
@@ -2033,13 +2106,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FuwanTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E2E9C6A2D8B4DDA61D6CDBFC /* [CP] Embed Pods Frameworks */ = {
@@ -2321,7 +2397,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Fuwan/Fuwan.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 7B33XM87CQ;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = FuWan/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -2344,7 +2424,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Fuwan/Fuwan.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 7B33XM87CQ;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = FuWan/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

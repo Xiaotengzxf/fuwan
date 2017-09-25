@@ -14,6 +14,7 @@ import UserNotifications
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var _mapManager: BMKMapManager?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
        //: 配置打印
@@ -26,6 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
        setupGlobalNotice()
        //: 配置ShareSDK
        setupShareSDK()
+        // 定位
+        setLocation()
         
         registerAPNS(application: application)
         BPush.registerChannel(launchOptions, apiKey: "uVkPUTLjGXy2SoL9tQlXA3Pu", pushMode: .development, withFirstAction: "打开", withSecondAction: "关闭", withCategory: "富玩", useBehaviorTextInput: true, isDebug: true)
@@ -35,6 +38,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    func setLocation() {
+        // 如果要关注网络及授权验证事件，请设定generalDelegate参数
+        let ret = _mapManager?.start("在此处输入您的授权Key", generalDelegate: nil)
+        if ret == false {
+            NSLog("manager start failed!")
+        }
+    }
 
     // register anple push notification sevice
     func registerAPNS(application: UIApplication) {
@@ -183,6 +193,20 @@ extension AppDelegate {
     
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        if url.host == "safepay" {
+            AlipaySDK.defaultService().processOrder(withPaymentResult: url, standbyCallback: { (result) in
+                
+            })
+        }
+        if url.host == "platformapi" {
+            AlipaySDK.defaultService().processAuthResult(url, standbyCallback: { (result) in
+                
+            })
+        }
+        return true
     }
 }
 

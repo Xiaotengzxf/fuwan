@@ -30,6 +30,8 @@ pod 'Toaster'
 
 pod 'WebViewBridge.Swift'
 
+pod 'BaiduMapKit'
+
   target 'FuwanTests' do
     inherit! :search_paths
     # Pods for testing
