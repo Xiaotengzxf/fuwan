@@ -40,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func setLocation() {
         // 如果要关注网络及授权验证事件，请设定generalDelegate参数
-        let ret = _mapManager?.start("在此处输入您的授权Key", generalDelegate: nil)
+        let ret = _mapManager?.start("q9j8lXngGgTFy1lzybschXSuG1r9jxn8", generalDelegate: nil)
         if ret == false {
             NSLog("manager start failed!")
         }

@@ -12,7 +12,7 @@ import SwiftyJSON
 
 let  bannerCarouselViewHeight = 160
 
-class mainClassifyViewController: BaseClassifyViewController, TopicCollectionViewDelegate, BannerCarouselViewDelegate, UISearchBarDelegate, BMKLocationServiceDelegate {
+class mainClassifyViewController: BaseClassifyViewController, TopicCollectionViewDelegate, BannerCarouselViewDelegate, UISearchBarDelegate, BMKLocationServiceDelegate, BMKGeoCodeSearchDelegate {
 
 //MARK: 懒加载
     lazy var headView:UIView = UIView()
@@ -54,6 +54,8 @@ class mainClassifyViewController: BaseClassifyViewController, TopicCollectionVie
     }()
     
     var _locService : BMKLocationService!
+    var loc : [String: String] = [:]
+    
 //MARK: 系统方法
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -174,7 +176,8 @@ class mainClassifyViewController: BaseClassifyViewController, TopicCollectionVie
     }
     
     func chooseCity(_ sender: Any) {
-        
+        let webView = WebViewController(url: AREA_URL + "?lan=&lai=")
+        self.navigationController?.pushViewController(webView, animated: true)
     }
     
     func goToChat(_ sender: Any) {
@@ -223,14 +226,100 @@ class mainClassifyViewController: BaseClassifyViewController, TopicCollectionVie
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }
-    
+    /*BMKCoordinateRegion region;
+     
+     region.center.latitude  = userLocation.location.coordinate.latitude;
+     region.center.longitude = userLocation.location.coordinate.longitude;
+     region.span.latitudeDelta = 0;
+     region.span.longitudeDelta = 0;
+     NSLog(@"当前的坐标是:%f,%f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
+     
+     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+     [geocoder reverseGeocodeLocation: userLocation.location completionHandler:^(NSArray *array, NSError *error) {
+     if (array.count > 0) {
+     CLPlacemark *placemark = [array objectAtIndex:0];
+     if (placemark != nil) {
+     NSString *city = placemark.locality;
+     
+     NSLog(@"当前城市名称------%@",city);
+     BMKOfflineMap * _offlineMap = [[BMKOfflineMap alloc] init];
+     _offlineMap.delegate = self;//可以不要
+     NSArray* records = [_offlineMap searchCity:city];
+     BMKOLSearchRecord* oneRecord = [records objectAtIndex:0];
+     //城市编码如:北京为131
+     NSInteger cityId = oneRecord.cityID;
+     
+     NSLog(@"当前城市编号-------->%zd",cityId);
+     //找到了当前位置城市后就关闭服务
+     [_locService stopUserLocationService];
+     
+     }
+     }
+     }];*/
     func didUpdate(_ userLocation: BMKUserLocation!) {
-        var loc : [String: String] = [:]
+        
+        
         loc["time"] = userLocation.location.timestamp.ToStringInfo()
+        loc["latitude"] = "\(userLocation.location.coordinate.latitude)"
+        loc["longitude"] = "\(userLocation.location.coordinate.longitude)"
+        loc["radius"] = "100"
+        loc["loctype"] = "161"
+        
+        var region: BMKCoordinateRegion = BMKCoordinateRegion()
+        region.center.latitude = userLocation.location.coordinate.latitude
+        region.center.longitude = userLocation.location.coordinate.longitude
+        region.span.latitudeDelta = 0
+        region.span.longitudeDelta = 0
+        let geocoder = CLGeocoder()
+        
+        geocoder.reverseGeocodeLocation(userLocation.location) {[weak self] (array, error) in
+            if array?.count ?? 0 > 0 {
+                if let placemark = array?[0] {
+                    if let city = placemark.locality {
+                        self?.loc["city"] = city
+                        var offlineMap = BMKOfflineMap()
+                        if let records = offlineMap.searchCity(city) as? [BMKOLSearchRecord] {
+                            let record = records[0]
+                            self?.loc["citycode"] = "\(record.cityID)"
+                            self?.loc["district"] = placemark.subLocality ?? ""
+                            self?.loc["street"] = placemark.thoroughfare ?? ""
+                            self?.loc["addr"] = placemark.subThoroughfare ?? ""
+                            self?.loc["locationdescribe"] = placemark.description
+                        }
+                    }
+                    if let country = placemark.country {
+                        self?.loc["country"] = country
+                        self?.loc["countrycode"] = placemark.isoCountryCode ?? ""
+                    }
+                }
+            }
+        }
+        
+        let option = BMKReverseGeoCodeOption()
+        option.reverseGeoPoint = userLocation.location.coordinate
+        let search = BMKGeoCodeSearch()
+        search.delegate = self
+        search.reverseGeoCode(option)
+        
+        loc["describe"] = "gps定位成功"
+        loc["imei"] = "1"
+        loc["userid"] = ""
     }
     
     func didUpdateUserHeading(_ userLocation: BMKUserLocation!) {
         
+    }
+    
+    func onGetReverseGeoCodeResult(_ searcher: BMKGeoCodeSearch!, result: BMKReverseGeoCodeResult!, errorCode error: BMKSearchErrorCode) {
+        if result.poiList.count > 0 {
+            if let poiInfos = result.poiList as? [BMKPoiInfo] {
+                var poi = ""
+                for info in poiInfos {
+                    poi += info.name + ";"
+                }
+                loc["poi"] = poi
+            }
+        }
     }
     
 }
