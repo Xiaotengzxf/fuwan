@@ -12,7 +12,7 @@ import SwiftyJSON
 
 let  bannerCarouselViewHeight = 160
 
-class mainClassifyViewController: BaseClassifyViewController, TopicCollectionViewDelegate, BannerCarouselViewDelegate, UISearchBarDelegate, BMKLocationServiceDelegate, BMKGeoCodeSearchDelegate {
+class mainClassifyViewController: BaseClassifyViewController, TopicCollectionViewDelegate, BannerCarouselViewDelegate, UISearchBarDelegate, BMKLocationServiceDelegate {
 
 //MARK: 懒加载
     lazy var headView:UIView = UIView()
@@ -226,44 +226,8 @@ class mainClassifyViewController: BaseClassifyViewController, TopicCollectionVie
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }
-    /*BMKCoordinateRegion region;
-     
-     region.center.latitude  = userLocation.location.coordinate.latitude;
-     region.center.longitude = userLocation.location.coordinate.longitude;
-     region.span.latitudeDelta = 0;
-     region.span.longitudeDelta = 0;
-     NSLog(@"当前的坐标是:%f,%f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
-     
-     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-     [geocoder reverseGeocodeLocation: userLocation.location completionHandler:^(NSArray *array, NSError *error) {
-     if (array.count > 0) {
-     CLPlacemark *placemark = [array objectAtIndex:0];
-     if (placemark != nil) {
-     NSString *city = placemark.locality;
-     
-     NSLog(@"当前城市名称------%@",city);
-     BMKOfflineMap * _offlineMap = [[BMKOfflineMap alloc] init];
-     _offlineMap.delegate = self;//可以不要
-     NSArray* records = [_offlineMap searchCity:city];
-     BMKOLSearchRecord* oneRecord = [records objectAtIndex:0];
-     //城市编码如:北京为131
-     NSInteger cityId = oneRecord.cityID;
-     
-     NSLog(@"当前城市编号-------->%zd",cityId);
-     //找到了当前位置城市后就关闭服务
-     [_locService stopUserLocationService];
-     
-     }
-     }
-     }];*/
+
     func didUpdate(_ userLocation: BMKUserLocation!) {
-        
-        
-        loc["time"] = userLocation.location.timestamp.ToStringInfo()
-        loc["latitude"] = "\(userLocation.location.coordinate.latitude)"
-        loc["longitude"] = "\(userLocation.location.coordinate.longitude)"
-        loc["radius"] = "100"
-        loc["loctype"] = "161"
         
         var region: BMKCoordinateRegion = BMKCoordinateRegion()
         region.center.latitude = userLocation.location.coordinate.latitude
@@ -277,49 +241,97 @@ class mainClassifyViewController: BaseClassifyViewController, TopicCollectionVie
                 if let placemark = array?[0] {
                     if let city = placemark.locality {
                         self?.loc["city"] = city
-                        var offlineMap = BMKOfflineMap()
-                        if let records = offlineMap.searchCity(city) as? [BMKOLSearchRecord] {
-                            let record = records[0]
-                            self?.loc["citycode"] = "\(record.cityID)"
-                            self?.loc["district"] = placemark.subLocality ?? ""
-                            self?.loc["street"] = placemark.thoroughfare ?? ""
-                            self?.loc["addr"] = placemark.subThoroughfare ?? ""
-                            self?.loc["locationdescribe"] = placemark.description
-                        }
-                    }
-                    if let country = placemark.country {
-                        self?.loc["country"] = country
-                        self?.loc["countrycode"] = placemark.isoCountryCode ?? ""
+                        self?.loc["district"] = placemark.subLocality ?? ""
+                        NetworkTools.shared.post(LOC_URL, parameters: self!.loc, finished: {[weak self] (isSucess, json, error) in
+                            guard let result = json else {
+                                return
+                            }
+                            
+                            if result["status"] == "success" {
+                                if let info = result["info"] as? String {
+                                    let array = info.components(separatedBy: "&")
+                                    var area_id = ""
+                                    var area_name = ""
+                                    var pos = ""
+                                    for item in array {
+                                        let arr = item.components(separatedBy: "=")
+                                        if arr.count == 2 {
+                                            if arr[0] == "area_id" {
+                                                area_id = arr[1]
+                                            }else if arr[0] == "area_name" {
+                                                area_name = arr[1]
+                                            }else if arr[0] == "pos" {
+                                                pos = arr[1]
+                                            }
+                                        }
+                                    }
+                                    if let area_name_old = UserDefaults.standard.string(forKey: "area_name") {
+                                        if area_name_old != area_name {
+                                            let alertController = UIAlertController(title: "提示", message: "定位到您在【\(area_name)】\n是否切换城市进行探索？", preferredStyle: .alert)
+                                            alertController.addAction(UIAlertAction(title: "确定", style: .default, handler: {[weak self] (action) in
+                                                if area_id.characters.count > 0 {
+                                                    UserDefaults.standard.set(area_id, forKey: "area_id")
+                                                }
+                                                if area_name.characters.count > 0 {
+                                                    UserDefaults.standard.set(area_name, forKey: "area_name")
+                                                }
+                                                if pos.characters.count > 0 {
+                                                    UserDefaults.standard.set(pos, forKey: "pos")
+                                                }
+                                                UserDefaults.standard.synchronize()
+                                                
+                                                self?.btnCity.setTitle(area_name, for: .normal)
+                                                
+                                            }))
+                                            alertController.addAction(UIAlertAction(title: "取消", style: .default, handler: { (action) in
+                                                
+                                            }))
+                                            self?.present(alertController, animated: true, completion: {
+                                                
+                                            })
+                                        }
+                                    }else{
+                                        if area_id.characters.count > 0 {
+                                            UserDefaults.standard.set(area_id, forKey: "area_id")
+                                        }
+                                        if area_name.characters.count > 0 {
+                                            UserDefaults.standard.set(area_name, forKey: "area_name")
+                                        }
+                                        if pos.characters.count > 0 {
+                                            UserDefaults.standard.set(pos, forKey: "pos")
+                                        }
+                                        UserDefaults.standard.synchronize()
+                                        
+                                        self?.btnCity.setTitle(area_name, for: .normal)
+                                    }
+                                    
+                                }
+                            }else{
+                                UserDefaults.standard.set("1917", forKey: "area_id")
+                                UserDefaults.standard.set("长垣", forKey: "area_name")
+                                UserDefaults.standard.synchronize()
+                                let alertController = UIAlertController(title: "提示", message: result["info"] as? String ?? "", preferredStyle: .alert)
+                                alertController.addAction(UIAlertAction(title: "确定", style: .default, handler: {[weak self] (action) in
+                                    let webView = WebViewController(url: AREA_URL + "?lan=&lai=")
+                                    self?.navigationController?.pushViewController(webView, animated: true)
+                                }))
+                                alertController.addAction(UIAlertAction(title: "取消", style: .default, handler: { (action) in
+                                    
+                                }))
+                                self?.present(alertController, animated: true, completion: {
+                                    
+                                })
+                            }
+                        })
                     }
                 }
+                self?._locService.stopUserLocationService()
             }
         }
-        
-        let option = BMKReverseGeoCodeOption()
-        option.reverseGeoPoint = userLocation.location.coordinate
-        let search = BMKGeoCodeSearch()
-        search.delegate = self
-        search.reverseGeoCode(option)
-        
-        loc["describe"] = "gps定位成功"
-        loc["imei"] = "1"
-        loc["userid"] = ""
     }
     
     func didUpdateUserHeading(_ userLocation: BMKUserLocation!) {
-        
-    }
-    
-    func onGetReverseGeoCodeResult(_ searcher: BMKGeoCodeSearch!, result: BMKReverseGeoCodeResult!, errorCode error: BMKSearchErrorCode) {
-        if result.poiList.count > 0 {
-            if let poiInfos = result.poiList as? [BMKPoiInfo] {
-                var poi = ""
-                for info in poiInfos {
-                    poi += info.name + ";"
-                }
-                loc["poi"] = poi
-            }
-        }
+        print("User Heading")
     }
     
 }
