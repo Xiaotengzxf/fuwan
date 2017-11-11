@@ -52,10 +52,10 @@ extension NetworkTools {
         //: 显示网络活动状态
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
     
-        Alamofire.request(url, method: .get, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+        Alamofire.request(jointUrl(url: url), method: .get, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
             self.handle(response: response, finished: finished)
         }.responseString { (response) in
-            print(response.result)
+            print("返回内容：\(response.result.value)")
         }
     }
     
@@ -71,8 +71,18 @@ extension NetworkTools {
         //: 显示网络活动状态
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         
-        Alamofire.request(url, method: .post, parameters: parameters, encoding: URLEncoding.default, headers:headers).responseJSON { (response) in
+        Alamofire.request(jointUrl(url: url), method: .post, parameters: parameters, encoding: URLEncoding.default, headers:headers).responseJSON { (response) in
             self.handle(response: response, finished: finished)
+            }.responseString { (response) in
+                print("返回内容：\(response.result.value)")
         }
+    }
+    
+    func jointUrl(url: String) -> String {
+        let token = UserDefaults.standard.string(forKey: "token") ?? ""
+        let area_id = UserDefaults.standard.string(forKey: "area_id") ?? ""
+        let loc_area_id = UserDefaults.standard.string(forKey: "loc_area_id") ?? ""
+        let pos = UserDefaults.standard.string(forKey: "pos") ?? ""
+        return url + "?token=\(token)&area_id=\(area_id)&loc_area_id=\(loc_area_id)&pos=\(pos)"
     }
 }

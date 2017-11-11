@@ -1,6 +1,0 @@
-framework module Pods_FuwanTests {
-  umbrella header "Pods-FuwanTests-umbrella.h"
-
-  export *
-  module * { export * }
-}

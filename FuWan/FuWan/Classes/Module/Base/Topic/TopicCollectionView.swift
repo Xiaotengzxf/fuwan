@@ -49,7 +49,7 @@ extension TopicCollectionView:UICollectionViewDelegate,UICollectionViewDataSourc
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! TopicViewCell
         let model = collectionData[indexPath.row]
-        cell.imageView.sd_setImage(with: URL(string: model["pic"].stringValue), placeholderImage: nil)
+        cell.imageView.sd_setImage(with: URL(string: model["pic"].stringValue), placeholderImage: UIImage(named: "logo"))
         cell.label.text = model["name"].stringValue
         
         return cell
@@ -69,7 +69,7 @@ class TopicFlowLayout:UICollectionViewFlowLayout{
         minimumLineSpacing = 0
         scrollDirection = .horizontal
         
-        itemSize = CGSize(width: ScreenWidth / 5, height: ScreenWidth / 5)
+        itemSize = CGSize(width: ScreenWidth / 5, height: max(ScreenWidth / 5, 75))
     }
 }
 

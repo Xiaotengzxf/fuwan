@@ -66,6 +66,8 @@ class AccountModel: NSObject,NSCoding {
         AccountModel.userAccount = self
         
         saveAccount()
+        
+        let _ = token()
     }
     
     fileprivate func saveAccount() {
@@ -105,6 +107,8 @@ class AccountModel: NSObject,NSCoding {
             for item in array {
                 if item.hasPrefix("token=") {
                     token = item.substring(from: item.index(item.startIndex, offsetBy: 6))
+                    UserDefaults.standard.set(token, forKey: "token")
+                    UserDefaults.standard.synchronize()
                 }
             }
         }

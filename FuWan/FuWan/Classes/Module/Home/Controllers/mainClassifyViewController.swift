@@ -9,10 +9,11 @@
 import UIKit
 import SnapKit
 import SwiftyJSON
+import Toaster
 
 let  bannerCarouselViewHeight = 160
 
-class mainClassifyViewController: BaseClassifyViewController, TopicCollectionViewDelegate, BannerCarouselViewDelegate, UISearchBarDelegate, BMKLocationServiceDelegate {
+class mainClassifyViewController: BaseClassifyViewController, TopicCollectionViewDelegate, BannerCarouselViewDelegate, BMKLocationServiceDelegate {
 
 //MARK: 懒加载
     lazy var headView:UIView = UIView()
@@ -36,14 +37,15 @@ class mainClassifyViewController: BaseClassifyViewController, TopicCollectionVie
         return button
     }()
     
-    lazy var search: UISearchBar = {
-        let searchbar = UISearchBar()
-        searchbar.placeholder = "请输入您想要搜索的内容"
-        searchbar.backgroundImage = UIImage()
-        searchbar.backgroundColor = UIColor.white
-        searchbar.layer.cornerRadius = 15
-        searchbar.delegate = self
-        return searchbar
+    lazy var btnSearch: UIButton = {
+        let btnSearch = UIButton(type: .custom)
+        btnSearch.setTitle("请输入您想要搜索的内容", for: .normal)
+        btnSearch.backgroundColor = UIColor.white
+        btnSearch.layer.cornerRadius = 15
+        btnSearch.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        btnSearch.setTitleColor(UIColor.lightGray, for: .normal)
+        btnSearch.addTarget(self, action: #selector(self.goToSearch(_:)), for: .touchUpInside)
+        return btnSearch
     }()
     
     lazy var btnChat: UIButton = {
@@ -55,6 +57,7 @@ class mainClassifyViewController: BaseClassifyViewController, TopicCollectionVie
     
     var _locService : BMKLocationService!
     var loc : [String: String] = [:]
+    var bLoadFinished = false
     
 //MARK: 系统方法
     override func viewDidLoad() {
@@ -65,9 +68,16 @@ class mainClassifyViewController: BaseClassifyViewController, TopicCollectionVie
         NetworkTools.shared.get(Load_AD_URL + "index_banner,search_default_text,hot_search_word,index_four_ad,index_recom_ad,index_module", parameters: nil) {[weak self] (isSucess, result, error) in
             
             guard let result = result else {
+                let alert = UIAlertController(title: "提示", message: "当前网络有问题，请先修复网络，再重新进入App！", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "确定", style: .default, handler: { (action) in
+                    
+                }))
+                self?.present(alert, animated: true, completion: {
+                    
+                })
                 return
             }
-            
+            self?.bLoadFinished = true
             if result["status"] == "success" {
                 if let datas = result["datas"].array {
                     for data in datas {
@@ -91,6 +101,45 @@ class mainClassifyViewController: BaseClassifyViewController, TopicCollectionVie
         _locService.delegate = self
         _locService.startUserLocationService()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(self.handleNotification(notification:)), name: Notification.Name("mainClassifyViewController"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.handleNotificationApplicationWillEnterForeground(notification:)), name: Notification.Name.UIApplicationWillEnterForeground, object: nil)
+    }
+    
+    func handleNotificationApplicationWillEnterForeground(notification: Notification) {
+        if bLoadFinished == false {
+            NetworkTools.shared.get(Load_AD_URL + "index_banner,search_default_text,hot_search_word,index_four_ad,index_recom_ad,index_module", parameters: nil) {[weak self] (isSucess, result, error) in
+                
+                guard let result = result else {
+                    let alert = UIAlertController(title: "提示", message: "当前网络有问题，请先修复网络，再重新进入App！", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "确定", style: .default, handler: { (action) in
+                        
+                    }))
+                    self?.present(alert, animated: true, completion: {
+                        
+                    })
+                    return
+                }
+                self?.bLoadFinished = true
+                if result["status"] == "success" {
+                    if let datas = result["datas"].array {
+                        for data in datas {
+                            if let type = data["type"].string, type == "index_banner" {
+                                self?.bannerCarousel.arrModel = data["lists"].arrayValue
+                                self?.bannerCarousel.pageControl.numberOfPages = data["lists"].arrayValue.count
+                                self?.bannerCarousel.reloadData()
+                                self?.bannerCarousel.setupBannerCarouselViewSubView()
+                            }else if let type = data["type"].string, type == "index_module" {
+                                self?.topicView.collectionData = data["lists"].arrayValue
+                                self?.topicView.reloadData()
+                            }
+                        }
+                    }
+                    
+                }
+                
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -103,7 +152,7 @@ class mainClassifyViewController: BaseClassifyViewController, TopicCollectionVie
         headView.snp.makeConstraints { (make) in
             make.left.top.equalToSuperview()
             make.width.equalTo(ScreenWidth)
-            let height : CGFloat = ScreenWidth * 2 / 5 + 2
+            let height : CGFloat = max(ScreenWidth * 2 / 5, 150) + 2
             make.height.equalTo(CGFloat(bannerCarouselViewHeight + 30) + height)
         }
 
@@ -115,7 +164,7 @@ class mainClassifyViewController: BaseClassifyViewController, TopicCollectionVie
         topicView.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
             make.top.equalTo(bannerCarousel.snp.bottom)
-            make.height.equalTo(ScreenWidth * 2 / 5 + 2)
+            make.height.equalTo(max(ScreenWidth * 2 / 5, 150) + 2)
         }
         
         labelTip.snp.makeConstraints { (make) in
@@ -138,7 +187,7 @@ class mainClassifyViewController: BaseClassifyViewController, TopicCollectionVie
             make.width.equalTo(30)
         }
         
-        search.snp.makeConstraints { (make) in
+        btnSearch.snp.makeConstraints { (make) in
             make.left.equalTo(btnCity.snp.right).offset(5)
             make.right.equalTo(btnChat.snp.left).offset(-5)
             make.height.equalTo(30)
@@ -147,7 +196,7 @@ class mainClassifyViewController: BaseClassifyViewController, TopicCollectionVie
         
         tableView.tableHeaderView = headView
         headView.backgroundColor = UIColor(red: 240/255.0, green: 240/255.0, blue: 240/255.0, alpha: 1)
-        tableView.tableHeaderView?.bounds = CGRect(x: 0, y: 0, width: ScreenWidth, height: CGFloat(bannerCarouselViewHeight + 70) + CGFloat(ScreenWidth * 2 / 5 + 2))
+        tableView.tableHeaderView?.bounds = CGRect(x: 0, y: 0, width: ScreenWidth, height: CGFloat(bannerCarouselViewHeight + 70) + CGFloat(ScreenWidth * 2 / 5 + 10))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -171,7 +220,7 @@ class mainClassifyViewController: BaseClassifyViewController, TopicCollectionVie
         bannerCarousel.viewDelegate = self
         tableView.tableHeaderView = headView
         headView.addSubview(btnCity)
-        headView.addSubview(search)
+        headView.addSubview(btnSearch)
         headView.addSubview(btnChat)
     }
     
@@ -181,16 +230,53 @@ class mainClassifyViewController: BaseClassifyViewController, TopicCollectionVie
     }
     
     func goToChat(_ sender: Any) {
-        
+        let message = MessageViewController()
+        self.navigationController?.pushViewController(message, animated: true)
+    }
+    
+    func goToSearch(_ sender: Any) {
+        let searchView = ZSearchViewController()
+        self.navigationController?.pushViewController(searchView, animated: true)
+    }
+    
+    func handleNotification(notification: Notification) {
+        if let content = notification.object as? String {
+            let array = content.components(separatedBy: "&")
+            var area_id = ""
+            var area_name = ""
+            for item in array {
+                let arr = item.components(separatedBy: "=")
+                if arr.count == 2 {
+                    if arr[0] == "area_id" {
+                        area_id = arr[1]
+                    }else if arr[0] == "area_name" {
+                        area_name = arr[1]
+                    }
+                }
+            }
+            if area_id.characters.count > 0 {
+                UserDefaults.standard.set(area_id, forKey: "area_id")
+            }
+            if area_name.characters.count > 0 {
+                UserDefaults.standard.set(area_name, forKey: "area_name")
+            }
+
+            UserDefaults.standard.synchronize()
+            
+            self.btnCity.setTitle(area_name, for: .normal)
+        }
     }
     
     // MARK: - Delegate
     func selectedIndexPath(indexPath: IndexPath, item: JSON) {
-        if let url = item["url"].string, url.characters.count > 0 {
+        if let url = item["url"].string, url.characters.count > 0 && url.hasPrefix("http") {
+            let webView = WebViewController(url: url)
+            self.navigationController?.pushViewController(webView, animated: true)
             return
         }
         if let modelId = item["modelid"].string {
             if modelId == "0" {
+                self.navigationController?.setNavigationBarHidden(false, animated: false)
                 let webView = WebViewController(url: CATEGORY_URL)
                 self.navigationController?.pushViewController(webView, animated: true)
             }else {
@@ -242,13 +328,14 @@ class mainClassifyViewController: BaseClassifyViewController, TopicCollectionVie
                     if let city = placemark.locality {
                         self?.loc["city"] = city
                         self?.loc["district"] = placemark.subLocality ?? ""
+                        self?.loc["ajax"] = "1"
                         NetworkTools.shared.post(LOC_URL, parameters: self!.loc, finished: {[weak self] (isSucess, json, error) in
                             guard let result = json else {
                                 return
                             }
                             
-                            if result["status"] == "success" {
-                                if let info = result["info"] as? String {
+                            if result["state"] == "success" {
+                                if let info = result["info"].string {
                                     let array = info.components(separatedBy: "&")
                                     var area_id = ""
                                     var area_name = ""
@@ -265,18 +352,25 @@ class mainClassifyViewController: BaseClassifyViewController, TopicCollectionVie
                                             }
                                         }
                                     }
+                                    if area_id.characters.count > 0 {
+                                        UserDefaults.standard.set(area_id, forKey: "loc_area_id")
+                                    }
+                                    if area_name.characters.count > 0 {
+                                        UserDefaults.standard.set(area_name, forKey: "loc_area_name")
+                                    }
+                                    if pos.characters.count > 0 {
+                                        UserDefaults.standard.set(pos, forKey: "pos")
+                                    }
+                                    UserDefaults.standard.synchronize()
                                     if let area_name_old = UserDefaults.standard.string(forKey: "area_name") {
                                         if area_name_old != area_name {
-                                            let alertController = UIAlertController(title: "提示", message: "定位到您在【\(area_name)】\n是否切换城市进行探索？", preferredStyle: .alert)
+                                            let alertController = UIAlertController(title: nil, message: "定位到您在【\(area_name)】\n是否切换城市进行探索？", preferredStyle: .alert)
                                             alertController.addAction(UIAlertAction(title: "确定", style: .default, handler: {[weak self] (action) in
                                                 if area_id.characters.count > 0 {
                                                     UserDefaults.standard.set(area_id, forKey: "area_id")
                                                 }
                                                 if area_name.characters.count > 0 {
                                                     UserDefaults.standard.set(area_name, forKey: "area_name")
-                                                }
-                                                if pos.characters.count > 0 {
-                                                    UserDefaults.standard.set(pos, forKey: "pos")
                                                 }
                                                 UserDefaults.standard.synchronize()
                                                 
@@ -310,7 +404,7 @@ class mainClassifyViewController: BaseClassifyViewController, TopicCollectionVie
                                 UserDefaults.standard.set("1917", forKey: "area_id")
                                 UserDefaults.standard.set("长垣", forKey: "area_name")
                                 UserDefaults.standard.synchronize()
-                                let alertController = UIAlertController(title: "提示", message: result["info"] as? String ?? "", preferredStyle: .alert)
+                                let alertController = UIAlertController(title: nil, message: result["info"].string ?? "", preferredStyle: .alert)
                                 alertController.addAction(UIAlertAction(title: "确定", style: .default, handler: {[weak self] (action) in
                                     let webView = WebViewController(url: AREA_URL + "?lan=&lai=")
                                     self?.navigationController?.pushViewController(webView, animated: true)

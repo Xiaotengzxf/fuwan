@@ -17,18 +17,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var _mapManager: BMKMapManager?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-       //: 配置打印
-       setupPrintLog()
-       //: 配置控制器
-       setupRootViewController()
-       //: 配置主题样式
-       setupGlobalStyle()
-       //: 配置系统通知
-       setupGlobalNotice()
-       //: 配置ShareSDK
-       setupShareSDK()
-        // 定位
-        setLocation()
+       setupPrintLog() //: 配置打印
+       setupRootViewController() //: 配置控制器
+       setupGlobalStyle() //: 配置主题样式
+       setupGlobalNotice() //: 配置系统通知
+       setupShareSDK() //: 配置ShareSDK
+        setLocation() // 定位
         
         registerAPNS(application: application)
         BPush.registerChannel(launchOptions, apiKey: "uVkPUTLjGXy2SoL9tQlXA3Pu", pushMode: .development, withFirstAction: "打开", withSecondAction: "关闭", withCategory: "富玩", useBehaviorTextInput: true, isDebug: true)
@@ -108,6 +102,7 @@ extension AppDelegate {
     
     //: 配置ShareSDK
     fileprivate func setupShareSDK() {
+        WXApi.registerApp("wxf9b24d55bdb6901d")
             ShareSDK.registerApp(SHARESDK_APP_KEY, activePlatforms: [
                 SSDKPlatformType.typeSinaWeibo.rawValue,
                 SSDKPlatformType.typeQQ.rawValue,
@@ -206,11 +201,39 @@ extension AppDelegate {
                 
             })
         }
+        if let url = options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String, url == "com.tencent.xin" {
+            WXApi.handleOpen(URL(string: url), delegate: self)
+        }
         return true
     }
 }
 
 @available(iOS 10.0, *)
 extension AppDelegate: UNUserNotificationCenterDelegate {
+    
+}
+
+extension AppDelegate: WXApiDelegate {
+    
+    func onReq(_ req: BaseReq!) {
+        
+    }
+    
+    func onResp(_ resp: BaseResp!) {
+        if let response = resp as? PayResp {
+            //支付返回结果，实际支付结果需要去微信服务器端查询
+            var strMsg = ""
+            switch (resp.errCode) {
+            case 0:
+                strMsg = "支付结果：成功！"
+                break
+            default:
+                strMsg = "支付结果：失败！retcode = \(resp.errCode), retstr = \(resp.errStr)"
+                break;
+            }
+            let alert = UIAlertView(title: "支付结果", message: strMsg, delegate: nil, cancelButtonTitle: "OK")
+            alert.show()
+        }
+    }
     
 }

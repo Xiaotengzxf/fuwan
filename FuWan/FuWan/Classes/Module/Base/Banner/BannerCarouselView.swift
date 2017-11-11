@@ -13,7 +13,7 @@ import SwiftyJSON
 
 let timeInterval = 2.0
 let pageLoopCount = 1000
-let cellHeight:CGFloat = 300.0
+let cellHeight:CGFloat = ScreenWidth * 2 / 5 + 192 
 let pageCotrolYOffSetOfBottom:CGFloat = 12.0
 
 class BannerCarouselView: UICollectionView {

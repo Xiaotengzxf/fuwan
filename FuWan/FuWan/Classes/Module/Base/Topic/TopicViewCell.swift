@@ -12,7 +12,12 @@ import SnapKit
 class TopicViewCell: UICollectionViewCell {
 
 //MARK: 懒加载
-    lazy var imageView:UIImageView = UIImageView()
+    lazy var imageView:UIImageView = {
+       let iv = UIImageView()
+        iv.layer.cornerRadius = 20
+        iv.layer.masksToBounds = true
+        return iv
+    }()
     lazy var label : UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14)
@@ -44,7 +49,7 @@ class TopicViewCell: UICollectionViewCell {
         imageView.snp.makeConstraints { (make) in
             make.width.height.equalTo(40)
             make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview().offset(-5)
+            make.centerY.equalToSuperview().offset(-15)
         }
         label.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()

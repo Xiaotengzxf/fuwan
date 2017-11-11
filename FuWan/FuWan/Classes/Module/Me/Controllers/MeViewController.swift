@@ -47,7 +47,7 @@ class MeViewController: WebViewController {
     
     // 加载用户的信息
     func loadUserInfo() {
-        if let token = AccountModel.shareAccount()?.token(), token.characters.count > 0 {
+        if let token = UserDefaults.standard.string(forKey: "token"), token.characters.count > 0 {
             self.mWebView.evaluateJavaScript("load_data('\(token)')", completionHandler: { (result, error) in
                 
             })

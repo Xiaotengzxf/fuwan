@@ -26,7 +26,7 @@ class MainViewController: UITabBarController {
         
         _ = addChildViewController(controller: mainClassifyViewController(), title: "主页", imageName: "tabbar_home")
         _ = addChildViewController(controller: HotViewController(), title: "服务", imageName: "tabbar_gift")
-        _ = addChildViewController(controller: ClassifyViewController(), title: "直播", imageName: "tabbar_category")
+        //_ = addChildViewController(controller: ClassifyViewController(), title: "直播", imageName: "tabbar_category")
         _ = addChildViewController(controller: MeViewController(), title: "我的", imageName: "tabbar_me")
         
         if AccountModel.isLogin() {
