@@ -11,6 +11,7 @@ import WebKit
 import Toaster
 import DZNEmptyDataSet
 import SwiftyJSON
+import SVProgressHUD
 
 class WebViewController: UIViewController, WKScriptMessageHandler, BMKLocationServiceDelegate {
     
@@ -349,6 +350,49 @@ class WebViewController: UIViewController, WKScriptMessageHandler, BMKLocationSe
                                         }
                                     }
                                 }
+                            }
+                        }
+                    }else if function == "bLive" {
+                        SVProgressHUD.show(withStatus: "加载中...")
+                        NTESChatroomManger.shareInstance().anchorEnterChatroom({[weak self] (error, roomid) in
+                            SVProgressHUD.dismiss()
+                            if error == nil {
+                                let push = NTESLiveStreamVC(chatroomId: roomid!)
+                                push?.pushUrl = NTESLiveDataCenter.shareInstance().pushUrl
+                                self?.present(push!, animated: true, completion: {
+                                    
+                                })
+                            }else{
+                                self?.view.makeToast("进入聊天室失败", duration: 2, position: CSToastPositionCenter)
+                            }
+                        })
+                    }else if function == "bView" {
+                         if let content = body["parameters"] as? String {
+                            let array = content.components(separatedBy: "=")
+                            SVProgressHUD.show(withStatus: "进入聊天室...")
+                            NTESChatroomManger.shareInstance().audienceEnterChatroom(withRoomid: array[1], complete: {[weak self] (error, value) in
+                                SVProgressHUD.dismiss()
+                                if error == nil {
+                                    NTESLiveDataCenter.shareInstance().pullUrl = NTESLiveDataCenter.shareInstance().rtmpPullUrl
+                                    let pullUrl = NTESLiveDataCenter.shareInstance().pullUrl
+                                    let vc = NTESPlayStreamVC(chatroomid: value, pullUrl: pullUrl)
+                                    self?.present(vc!, animated: true, completion: {
+                                        
+                                    })
+                                } else {
+                                    self?.view.makeToast("进入聊天室失败", duration: 2, position: CSToastPositionCenter)
+                                }
+                            })
+                        }
+                    }else if function == "Call" {
+                        if let content = body["parameters"] as? String {
+                            if #available(iOS 10, *) {
+                                UIApplication.shared.open(URL(string: "tel://\(content)")!, options: [:],
+                                                          completionHandler: {
+                                                            (success) in
+                                })
+                            } else {
+                                UIApplication.shared.openURL(URL(string: "tel://\(content)")!)
                             }
                         }
                     }

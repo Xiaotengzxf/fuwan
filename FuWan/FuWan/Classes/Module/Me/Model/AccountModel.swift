@@ -58,7 +58,7 @@ class AccountModel: NSObject,NSCoding {
             QL4("退出异常")
         }
         
-        NotificationCenter.default.post(name: Notification.Name("tabbar"), object: 2)
+        //NotificationCenter.default.post(name: Notification.Name("tabbar"), object: 2)
         
     }
     

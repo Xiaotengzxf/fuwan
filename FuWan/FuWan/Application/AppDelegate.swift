@@ -9,6 +9,8 @@
 import UIKit
 import QorumLogs
 import UserNotifications
+import SVProgressHUD
+import RealReachability
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -29,6 +31,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let userInfo = launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] {
             BPush.handleNotification(userInfo as! [AnyHashable : Any])
         }
+        
+        let appKey = NTESDemoConfig.shared().appKey
+        let cerName = NTESDemoConfig.shared().cerName
+        NIMSDK.shared().register(withAppID: appKey ?? "", cerName: cerName ?? "")
+        NIMCustomObject.registerCustomDecoder(NTESAttachDecoder())
+        NTESAuthorizationHelper.requestAblumAuthority { (error) in
+            
+        }
+        NTESAuthorizationHelper.requestMediaCapturerAccess { (error) in
+            
+        }
+        SVProgressHUD.setDefaultStyle(.dark)
+        SVProgressHUD.setDefaultMaskType(.black)
+        SVProgressHUD.setMaximumDismissTimeInterval(1)
+        RealReachability.sharedInstance().autoCheckInterval = 1
+        RealReachability.sharedInstance().startNotifier()
+        NTESSandboxHelper.clearRecordVideoPath()
+        
         return true
     }
     

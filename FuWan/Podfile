@@ -31,4 +31,16 @@ pod 'WebViewBridge.Swift'
 pod 'BaiduMapKit'
 pod 'DZNEmptyDataSet'
 
+
+pod 'YYKeyboardManager', '~> 1.0.1'
+pod 'YYText', '~> 1.0.7'
+pod 'YYModel', '~> 1.0.4'
+pod 'YYWebImage', '~> 1.0.5'
+pod 'Masonry', '~> 1.0.2'
+pod 'RealReachability', '~> 1.1.9'
+
+pod 'TZImagePickerController'
+
+pod 'AFNetworking'
+
 end
