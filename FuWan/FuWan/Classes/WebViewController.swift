@@ -60,6 +60,17 @@ class WebViewController: UIViewController, WKScriptMessageHandler, BMKLocationSe
                 self?.mWebView.customUserAgent = "\(useAgent);FuWanBroswer;FWB-IOS"
                 
                 if self!.strUrl != nil && self!.strUrl!.hasPrefix("http") {
+                    if let token = UserDefaults.standard.string(forKey: "token"), token.characters.count > 0 {
+                        let array = self!.strUrl?.components(separatedBy: "#")
+                        if (array?.count ?? 0) > 1 {
+                            let suffix = "#\(array![1])"
+                            if array![0].contains("?") {
+                                self!.strUrl = "\(array![0])&token=\(token)\(suffix)"
+                            }else{
+                                self!.strUrl = "\(array![0])?token=\(token)\(suffix)"
+                            }
+                        }
+                    }
                     let url = URL(string: self!.strUrl!)
                     let request = URLRequest(url: url!, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 60)
                     self!.mWebView.load(request)

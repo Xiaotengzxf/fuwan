@@ -467,7 +467,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0D016F7EF5B21BD9D070B068 /* Pods____Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods____Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0D016F7EF5B21BD9D070B068 /* Pods____Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods____Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		394C7930EEB84202F650BFAB /* Pods_FuwanTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FuwanTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		46918E9985CFBF9D152F97C8 /* Pods-FuwanUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FuwanUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FuwanUITests/Pods-FuwanUITests.release.xcconfig"; sourceTree = "<group>"; };
 		5CA2E5AA710D8935ECD8FD59 /* Pods_Fuwan.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fuwan.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -577,7 +577,7 @@
 		85E388F01EA12760008BA044 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		85E388F21EA12760008BA044 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D7105EDE7797B9B6028F37B /* Pods_FuwanUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FuwanUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		90D93438A1D0D71A5B9B4A23 /* Pods____UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods____UITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		90D93438A1D0D71A5B9B4A23 /* Pods____UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods____UITests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A2A907E1F8B17F60072577E /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		9A2BF0D61F43023200561ADB /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		9A2BF1031F46E25100561ADB /* Extenstions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extenstions.swift; sourceTree = "<group>"; };
@@ -1371,7 +1371,7 @@
 		9AA15BF21FB9B14900A7E323 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		9AA15BF31FB9B73800A7E323 /* NTESDemoPrefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESDemoPrefix.pch; sourceTree = "<group>"; };
 		9EB44B32340277C0647C8D52 /* Pods-FuwanTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FuwanTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FuwanTests/Pods-FuwanTests.debug.xcconfig"; sourceTree = "<group>"; };
-		AF2DC5C99C772F02DD6074DA /* Pods____.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods____.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF2DC5C99C772F02DD6074DA /* Pods____.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods____.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2741B15182C4867D5306A02 /* Pods-FuwanTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FuwanTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FuwanTests/Pods-FuwanTests.release.xcconfig"; sourceTree = "<group>"; };
 		B6D449DFF3C3CDA69229F438 /* Pods-Fuwan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fuwan.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fuwan/Pods-Fuwan.debug.xcconfig"; sourceTree = "<group>"; };
 		BF7F90BACE8E62E1B1441E1B /* Pods-Fuwan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fuwan.release.xcconfig"; path = "Pods/Target Support Files/Pods-Fuwan/Pods-Fuwan.release.xcconfig"; sourceTree = "<group>"; };
