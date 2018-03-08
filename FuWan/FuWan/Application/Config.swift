@@ -53,3 +53,15 @@ let SEARCH_PAGE=BASE_URL+"/items/category/search/"
 let CATEGORY_URL=BASE_URL+"/items/module/all"
 let UCENTER_URL=BASE_URL+"/user/center/index"
 let MCENTER_URL=BASE_URL+"/merchant/mcenter/index"
+let FOUND_URL = BASE_URL + "/sns/index/home"
+let PORTAL_URL = BASE_URL + "/portal/index/home"
+let LIVE_URL = BASE_URL + "/live/index/lists"
+let SENDMSG_URL = BASE_URL + "/sns/index/home#/send"//"/sns/space/sendmsg"
+let PUBLISH_URL = BASE_URL + "/sns/art/publish"
+let MESSAGES_URL = BASE_URL + "/user/api/messages"
+
+
+// 视频直播
+let WY_APP_KEY = "ff0c9deec750b95f2e8c48018c0fcda1"
+let WY_APP_SECRET = "4a0b114d9ac5"
+let WY_URL = "http://dev.netease.im/"

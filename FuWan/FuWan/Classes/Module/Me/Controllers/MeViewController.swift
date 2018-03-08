@@ -41,13 +41,17 @@ class MeViewController: WebViewController {
         if let tag = notification.object as? Int {
             if tag == 1 {
                 loadUserInfo()
+            } else if tag == 2 {
+                self.mWebView.evaluateJavaScript("removeUserInfo();", completionHandler: { (result, error) in
+
+                })
             }
         }
     }
     
     // 加载用户的信息
     func loadUserInfo() {
-        if let token = UserDefaults.standard.string(forKey: "token"), token.characters.count > 0 {
+        if let token = UserDefaults.standard.string(forKey: "token"), token.count > 0 {
             self.mWebView.evaluateJavaScript("load_data('\(token)')", completionHandler: { (result, error) in
                 
             })
@@ -57,12 +61,12 @@ class MeViewController: WebViewController {
     // 页面加载完成之后调用
     override func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!){
         /// 获取网页title
-        super.webView(webView, didCommit: navigation)
-        if !bLoad {
-            bLoad = true
-            loadUserInfo()
+        super.webView(webView, didFinish: navigation)
+        if bLoad {
+           return
         }
-        
+        bLoad = true
+        loadUserInfo()
     }
  
     

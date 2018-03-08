@@ -8,26 +8,31 @@
 
 import UIKit
 
-class MainViewController: UITabBarController {
+class MainViewController: UITabBarController, UITabBarControllerDelegate {
     
     var vcMerchant : MerchantViewController?
+    var meNav: UINavigationController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         //: 添加子控制器
         addChildViewController()
-        
+        self.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(self.handleNotification(notification:)), name: Notification.Name("tabbar"), object: nil)
         
+        loadMessagesCount()
     }
 
     private func addChildViewController(){
         
-        _ = addChildViewController(controller: mainClassifyViewController(), title: "主页", imageName: "tabbar_home")
+        //_ = addChildViewController(controller: mainClassifyViewController(), title: "主页", imageName: "tabbar_home")
+        _ = addChildViewController(controller: HomeViewController(), title: "主页", imageName: "tabbar_home")
         _ = addChildViewController(controller: HotViewController(), title: "服务", imageName: "tabbar_gift")
+        _ = addChildVC(controller: UIViewController(), title: "", imageName: "tabbar_add")
         //_ = addChildViewController(controller: ClassifyViewController(), title: "直播", imageName: "tabbar_category")
-        _ = addChildViewController(controller: MeViewController(), title: "我的", imageName: "tabbar_me")
+        _ = addChildViewController(controller: FoundViewController(), title: "发现", imageName: "tabbar_found")
+        meNav = addChildViewController(controller: MeViewController(), title: "我的", imageName: "tabbar_me")
         
         if AccountModel.isLogin() {
             if vcMerchant == nil {
@@ -38,15 +43,29 @@ class MainViewController: UITabBarController {
     }
     
     private func addChildViewController(controller: UIViewController, title: String, imageName: String) -> UINavigationController {
+        if title == "" {
+            controller.tabBarItem.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: -10)
+            controller.tabBarItem.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0)
+        }
         controller.tabBarItem.image = UIImage(named: imageName)
         controller.tabBarItem.selectedImage = UIImage(named: imageName + "_selected")
         controller.title = title
-        
         let nav = NavigationController()
         nav.addChildViewController(controller)
         addChildViewController(nav)
         
         return nav
+    }
+    
+    private func addChildVC(controller: UIViewController, title: String, imageName: String) -> UIViewController {
+        controller.tabBarItem.image = UIImage(named: imageName)
+        controller.tabBarItem.selectedImage = UIImage(named: imageName + "_selected")
+        controller.title = title
+        controller.tabBarItem.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: -10)
+        controller.tabBarItem.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0)
+        addChildViewController(controller)
+        
+        return controller
     }
     
     func addMerchant() {
@@ -80,8 +99,51 @@ class MainViewController: UITabBarController {
             }else if tag == 2 {
                 vcMerchant?.navigationController?.removeFromParentViewController()
                 vcMerchant = nil
+            } else if tag == 3 {
+                if let nav = viewControllers?[selectedIndex] as? UINavigationController {
+                    let controller = loginViewController()
+                    controller.hidesBottomBarWhenPushed = true
+                    nav.pushViewController(controller, animated: true)
+                }
             }
         }
     }
+    
+    func loadMessagesCount() {
+        NetworkTools.shared.get(MESSAGES_URL, parameters: nil, finished: {[weak self] (value, json, error) in
+            if value {
+                if json != nil {
+                    if let rows = json!["rows"].int, rows > 0 {
+                        self?.meNav.tabBarItem.badgeValue = "\(rows)"
+                    } else {
+                        self?.meNav.tabBarItem.badgeValue = nil
+                    }
+                }
+            }
+        })
+        
+    }
+    
+    // MARK: UITabbarDelegate
 
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        if let _ = viewController as? UINavigationController {
+            return true
+        }else{
+            let moreVC = MoreViewController()
+            moreVC.view.backgroundColor = UIColor.white.withAlphaComponent(0.8)
+            moreVC.modalTransitionStyle = .crossDissolve
+            moreVC.modalPresentationStyle = .overFullScreen
+            self.present(moreVC, animated: false, completion: {
+                
+            })
+            return false
+        }
+    }
+    
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        if tabBarController.selectedIndex == 4 {
+            meNav.tabBarItem.badgeValue = nil
+        }
+    }
 }

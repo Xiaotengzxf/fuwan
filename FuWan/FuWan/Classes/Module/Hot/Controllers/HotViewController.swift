@@ -11,7 +11,7 @@ import WebKit
 
 class HotViewController: WebViewController {
 
-//MARK: 系统方法
+// MARK: - 系统方法
     override func viewDidLoad() {
         strUrl = CATEGORY_URL
         super.viewDidLoad()

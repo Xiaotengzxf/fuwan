@@ -53,12 +53,12 @@ class AccountModel: NSObject,NSCoding {
         // 清除内存中的账户数据和归档中的数据
         AccountModel.userAccount = nil
         do {
-            try FileManager.default.removeItem(atPath: AccountModel.filePath)
+            if FileManager.default.fileExists(atPath: AccountModel.filePath) {
+                try FileManager.default.removeItem(atPath: AccountModel.filePath)
+            }
         } catch {
             QL4("退出异常")
         }
-        
-        NotificationCenter.default.post(name: Notification.Name("tabbar"), object: 2)
         
     }
     

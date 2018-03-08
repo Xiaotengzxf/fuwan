@@ -45,5 +45,11 @@
 
 #import <BaiduMapAPI_Map/BMKMapView.h>//只引入所需的单个头文件
 
-
-
+#import "/Users/anker/Desktop/fuwan/FuWan/FuWan/LiveApp/LiveStream_IM_Demo/Supporting Files/NTESDemoPrefix.pch"
+#import "NTESRootNavVC.h"
+#import "NTESAttachDecoder.h"
+#import "NTESChatroomManger.h"
+#import "NTESLiveDataCenter.h"
+#import "NTESPlayStreamVC.h"
+#import "NTESEncryption.h"
+#import "NTESLiveStreamVC.h"

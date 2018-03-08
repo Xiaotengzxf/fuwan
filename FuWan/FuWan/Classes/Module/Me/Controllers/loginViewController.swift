@@ -38,6 +38,11 @@ class loginViewController: UIViewController {
         setupLoginViewSubView()
         
     }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
 //MARK: 私有方法
     private func setupLoginView() {
         mainView.delegate = self
@@ -83,7 +88,7 @@ extension loginViewController:LoginViewDelegate {
         parameters["password"] = pwd
         parameters["imei"] = ""
         
-        NetworkTools.shared.post(LOGIN_URL, parameters: parameters) { (isSuccess, result, error) in
+        NetworkTools.shared.post(LOGIN_URL, parameters: parameters) {[weak self] (isSuccess, result, error) in
             if isSuccess {
                 if let state = result?["state"].string, state == "success" {
                     
@@ -91,8 +96,7 @@ extension loginViewController:LoginViewDelegate {
                     account.saveAccountInfo()
                     
                     NotificationCenter.default.post(name: Notification.Name("Me"), object: 1)
-                    NotificationCenter.default.post(name: Notification.Name("tabbar"), object: 1)
-                    self.navigationController?.popViewController(animated: true)
+                    self?.navigationController?.popViewController(animated: true)
                 }
             }else{
                 

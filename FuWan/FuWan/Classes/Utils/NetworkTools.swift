@@ -48,14 +48,14 @@ extension NetworkTools {
      - parameter parameters: 参数
      - parameter finished:   完成回调
      */
-    func get(_ url:String,parameters:[String:Any]?,finished:@escaping FinishedOperation) {
+    func get(_ url:String,parameters:[String:Any]?, changeUrl: Bool = false, finished:@escaping FinishedOperation) {
         //: 显示网络活动状态
+        print("请求的url: \(url)")
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
-    
-        Alamofire.request(jointUrl(url: url), method: .get, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+        Alamofire.request(changeUrl ? url : jointUrl(url: url), method: .get, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
             self.handle(response: response, finished: finished)
         }.responseString { (response) in
-            print("返回内容：\(response.result.value)")
+            print("返回内容：\(String(describing: response.result.value))")
         }
     }
     
@@ -74,7 +74,7 @@ extension NetworkTools {
         Alamofire.request(jointUrl(url: url), method: .post, parameters: parameters, encoding: URLEncoding.default, headers:headers).responseJSON { (response) in
             self.handle(response: response, finished: finished)
             }.responseString { (response) in
-                print("返回内容：\(response.result.value)")
+                print("返回内容：\(String(describing: response.result.value))")
         }
     }
     

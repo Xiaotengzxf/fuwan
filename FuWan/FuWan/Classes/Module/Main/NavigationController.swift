@@ -24,6 +24,10 @@ class NavigationController: UINavigationController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    override var childViewControllerForStatusBarStyle: UIViewController? {
+        return self.topViewController
+    }
 
 //MARK: 私有方法
     private func setupNavigationBar() {
