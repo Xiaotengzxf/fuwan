@@ -54,22 +54,26 @@ class MoreViewController: UIViewController {
     }
     
     func tapFunctionView(sender: Any) {
+        
+        if let token = UserDefaults.standard.string(forKey: "token"), token.count > 0 {
+            
+        }else{
+            dismissForBack()
+            NotificationCenter.default.post(name: Notification.Name("tabbar"), object: 3)
+            return
+        }
+        
         if let button = sender as? UIButton {
             switch button.tag {
             case 0:
-                if let token = UserDefaults.standard.string(forKey: "token"), token.characters.count > 0 {
-                    let moreDetailVC = MoreDetailViewController()
-                    moreDetailVC.strUrl = LIVE_URL
-                    moreDetailVC.title = "直播"
-                    let nav = UINavigationController(rootViewController: moreDetailVC)
-                    nav.modalTransitionStyle = .flipHorizontal
-                    self.present(nav, animated: true, completion: {
-                        
-                    })
-                }else{
-                    self.view.makeToast("请先登录")
-                }
-                
+                let moreDetailVC = MoreDetailViewController()
+                moreDetailVC.strUrl = LIVE_URL
+                moreDetailVC.title = "直播"
+                let nav = UINavigationController(rootViewController: moreDetailVC)
+                nav.modalTransitionStyle = .flipHorizontal
+                self.present(nav, animated: true, completion: {
+                    
+                })
             case 1:
                 let moreDetailVC = MoreDetailViewController()
                 moreDetailVC.strUrl = SENDMSG_URL

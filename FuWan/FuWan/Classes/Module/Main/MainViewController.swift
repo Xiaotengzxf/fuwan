@@ -11,6 +11,7 @@ import UIKit
 class MainViewController: UITabBarController, UITabBarControllerDelegate {
     
     var vcMerchant : MerchantViewController?
+    var meNav: UINavigationController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +21,7 @@ class MainViewController: UITabBarController, UITabBarControllerDelegate {
         self.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(self.handleNotification(notification:)), name: Notification.Name("tabbar"), object: nil)
         
+        loadMessagesCount()
     }
 
     private func addChildViewController(){
@@ -30,7 +32,7 @@ class MainViewController: UITabBarController, UITabBarControllerDelegate {
         _ = addChildVC(controller: UIViewController(), title: "", imageName: "tabbar_add")
         //_ = addChildViewController(controller: ClassifyViewController(), title: "直播", imageName: "tabbar_category")
         _ = addChildViewController(controller: FoundViewController(), title: "发现", imageName: "tabbar_found")
-        _ = addChildViewController(controller: MeViewController(), title: "我的", imageName: "tabbar_me")
+        meNav = addChildViewController(controller: MeViewController(), title: "我的", imageName: "tabbar_me")
         
         if AccountModel.isLogin() {
             if vcMerchant == nil {
@@ -97,8 +99,29 @@ class MainViewController: UITabBarController, UITabBarControllerDelegate {
             }else if tag == 2 {
                 vcMerchant?.navigationController?.removeFromParentViewController()
                 vcMerchant = nil
+            } else if tag == 3 {
+                if let nav = viewControllers?[selectedIndex] as? UINavigationController {
+                    let controller = loginViewController()
+                    controller.hidesBottomBarWhenPushed = true
+                    nav.pushViewController(controller, animated: true)
+                }
             }
         }
+    }
+    
+    func loadMessagesCount() {
+        NetworkTools.shared.get(MESSAGES_URL, parameters: nil, finished: {[weak self] (value, json, error) in
+            if value {
+                if json != nil {
+                    if let rows = json!["rows"].int, rows > 0 {
+                        self?.meNav.tabBarItem.badgeValue = "\(rows)"
+                    } else {
+                        self?.meNav.tabBarItem.badgeValue = nil
+                    }
+                }
+            }
+        })
+        
     }
     
     // MARK: UITabbarDelegate
@@ -115,6 +138,12 @@ class MainViewController: UITabBarController, UITabBarControllerDelegate {
                 
             })
             return false
+        }
+    }
+    
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        if tabBarController.selectedIndex == 4 {
+            meNav.tabBarItem.badgeValue = nil
         }
     }
 }

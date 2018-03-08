@@ -49,6 +49,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         RealReachability.sharedInstance().startNotifier()
         NTESSandboxHelper.clearRecordVideoPath()
         
+        _ = HKCheckVersionManager(appId: "1299001104")
+        
         return true
     }
     

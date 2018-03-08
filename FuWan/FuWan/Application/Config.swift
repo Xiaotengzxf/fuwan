@@ -56,8 +56,9 @@ let MCENTER_URL=BASE_URL+"/merchant/mcenter/index"
 let FOUND_URL = BASE_URL + "/sns/index/home"
 let PORTAL_URL = BASE_URL + "/portal/index/home"
 let LIVE_URL = BASE_URL + "/live/index/lists"
-let SENDMSG_URL = BASE_URL + "/sns/space/sendmsg"
+let SENDMSG_URL = BASE_URL + "/sns/index/home#/send"//"/sns/space/sendmsg"
 let PUBLISH_URL = BASE_URL + "/sns/art/publish"
+let MESSAGES_URL = BASE_URL + "/user/api/messages"
 
 
 // 视频直播

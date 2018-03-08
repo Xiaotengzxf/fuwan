@@ -21,6 +21,8 @@ class WebViewController: UIViewController, WKScriptMessageHandler, BMKLocationSe
     var bSingle = false
     var _locService : BMKLocationService!
     var emptyDataSetShown = false
+    var topConstraint: NSLayoutConstraint?
+    var showNavigationBar = false
     
     convenience init(url: String) {
         self.init()
@@ -52,8 +54,11 @@ class WebViewController: UIViewController, WKScriptMessageHandler, BMKLocationSe
         mWebView.isUserInteractionEnabled = true
         self.view.addSubview(mWebView)
         
+        let top: CGFloat = UIScreen.main.bounds.height == 812 ? 44 : 22
         self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[webView]|", options: .directionLeadingToTrailing, metrics: nil, views: ["webView" : mWebView]))
-        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[webView]|", options: .directionLeadingToTrailing, metrics: nil, views: ["webView" : mWebView]))
+        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[webView]|", options: .directionLeadingToTrailing, metrics: nil, views: ["webView" : mWebView]))
+        topConstraint = NSLayoutConstraint(item: mWebView, attribute: .top, relatedBy: .equal, toItem: self.view, attribute: .top, multiplier: 1, constant: top)
+        self.view.addConstraint(topConstraint!)
         
         mWebView.evaluateJavaScript("navigator.userAgent") {[weak self] (result, error) in
             if let useAgent = result as? String {
@@ -61,6 +66,7 @@ class WebViewController: UIViewController, WKScriptMessageHandler, BMKLocationSe
                 
                 if self!.strUrl != nil && self!.strUrl!.hasPrefix("http") {
                     if let token = UserDefaults.standard.string(forKey: "token"), token.characters.count > 0 {
+                        print("token: \(token)")
                         let array = self!.strUrl?.components(separatedBy: "#")
                         if (array?.count ?? 0) > 1 {
                             let suffix = "#\(array![1])"
@@ -69,8 +75,17 @@ class WebViewController: UIViewController, WKScriptMessageHandler, BMKLocationSe
                             }else{
                                 self!.strUrl = "\(array![0])?token=\(token)\(suffix)"
                             }
+                        } else {
+                            if !self!.strUrl!.contains("token") {
+                                if self!.strUrl!.contains("?") && self!.strUrl!.contains("="){
+                                    self!.strUrl = self!.strUrl! + "&token=\(token)"
+                                } else {
+                                    self!.strUrl = self!.strUrl! + "?token=\(token)"
+                                }
+                            }
                         }
                     }
+                    print("最终的url: \(self!.strUrl!)")
                     let url = URL(string: self!.strUrl!)
                     let request = URLRequest(url: url!, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 60)
                     self!.mWebView.load(request)
@@ -96,16 +111,30 @@ class WebViewController: UIViewController, WKScriptMessageHandler, BMKLocationSe
         mWebView.scrollView.emptyDataSetSource = self
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if showNavigationBar {
+            self.navigationController?.setNavigationBarHidden(false, animated: false)
+        }
+        if let bNavigationHidden = self.navigationController?.isNavigationBarHidden {
+            let top: CGFloat = UIScreen.main.bounds.height == 812 ? 44 : 22
+            topConstraint?.constant = bNavigationHidden ? top : 0
+        }
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if let token = UserDefaults.standard.string(forKey: "token"), token.characters.count > 0 {
+        if let token = UserDefaults.standard.string(forKey: "token"), token.count > 0 {
             mWebView.evaluateJavaScript("reload_data('\(token)');") { (result, error) in
                 
             }
-        }else{
-            mWebView.evaluateJavaScript("reload_data('');") { (result, error) in
-                
-            }
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if showNavigationBar {
+            self.navigationController?.setNavigationBarHidden(true, animated: false)
         }
     }
 
@@ -168,7 +197,7 @@ class WebViewController: UIViewController, WKScriptMessageHandler, BMKLocationSe
             if let body = message.body as? [String : Any] {
                 if let function = body["function"] as? String {
                     if function == "login" {
-                        if let token = UserDefaults.standard.string(forKey: "token"), token.characters.count > 0 {
+                        if let token = UserDefaults.standard.string(forKey: "token"), token.count > 0 {
                             
                         }else{
                             if let _ = self.navigationController?.visibleViewController as? loginViewController {
@@ -181,16 +210,19 @@ class WebViewController: UIViewController, WKScriptMessageHandler, BMKLocationSe
                         }
                     }else if function == "logOut" {
                         AccountModel.logout()
-                        mWebView.evaluateJavaScript("removeUserInfo();", completionHandler: { (result, error) in
-                            
-                        })
-                        //self.navigationController?.popViewController(animated: true)
+                        NotificationCenter.default.post(name: Notification.Name("Me"), object: 2)
+                        UserDefaults.standard.removeObject(forKey: "token")
+                        self.navigationController?.popViewController(animated: true)
+                        
                     }else if function == "closeWindow" {
                         self.navigationController?.popViewController(animated: true)
                     }else if function == "openWindow" {
                         if let strUrl = body["parameters"] as? String, strUrl.hasPrefix("http") {
                             print("跳转的url:\(strUrl)")
                             let webView = WebViewController(url: strUrl)
+                            if strUrl.contains("live/chatroom/index") {
+                                webView.showNavigationBar = true
+                            }
                             self.navigationController?.pushViewController(webView, animated: true)
                         }
                     }else if function == "copy" {
@@ -229,11 +261,20 @@ class WebViewController: UIViewController, WKScriptMessageHandler, BMKLocationSe
                         // title img url desc
                         if let dicContent = body["parameters"] as? [String: String] {
                             let shareParames = NSMutableDictionary()
-                            shareParames.ssdkSetupShareParams(byText: dicContent["desc"]!,
-                                                              images : UIImage(named: "logo1"),
-                                                              url : URL(string: dicContent["url"]!),
-                                                              title : dicContent["title"]!,
-                                                              type : SSDKContentType.webPage)
+                            if let img = dicContent["img"], img.hasPrefix("http") {
+                                shareParames.ssdkSetupShareParams(byText: dicContent["desc"]!,
+                                                                  images : img,
+                                    url : URL(string: dicContent["url"]!),
+                                    title : dicContent["title"]!,
+                                    type : SSDKContentType.webPage)
+                            } else {
+                                shareParames.ssdkSetupShareParams(byText: dicContent["desc"]!,
+                                                                  images : UIImage(named: "logo1"),
+                                                                  url : URL(string: dicContent["url"]!),
+                                                                  title : dicContent["title"]!,
+                                                                  type : SSDKContentType.webPage)
+                            }
+                            
                             ShareSDK.share(.subTypeWechatTimeline, parameters: shareParames, onStateChanged: { (state, value, entity, error) in
                                 switch state{
                                     
@@ -251,11 +292,19 @@ class WebViewController: UIViewController, WKScriptMessageHandler, BMKLocationSe
                     }else if function == "shareWxFriend" {
                         if let dicContent = body["parameters"] as? [String: String] {
                             let shareParames = NSMutableDictionary()
-                            shareParames.ssdkSetupShareParams(byText: dicContent["desc"]!,
-                                                              images : UIImage(named: "logo1"),
-                            url : URL(string: dicContent["url"]!),
-                            title : dicContent["title"]!,
-                            type : SSDKContentType.webPage)
+                            if let img = dicContent["img"], img.hasPrefix("http") {
+                                shareParames.ssdkSetupShareParams(byText: dicContent["desc"]!,
+                                                                  images : img,
+                                                                  url : URL(string: dicContent["url"]!),
+                                                                  title : dicContent["title"]!,
+                                                                  type : SSDKContentType.webPage)
+                            } else {
+                                shareParames.ssdkSetupShareParams(byText: dicContent["desc"]!,
+                                                                  images : UIImage(named: "logo1"),
+                                                                  url : URL(string: dicContent["url"]!),
+                                                                  title : dicContent["title"]!,
+                                                                  type : SSDKContentType.webPage)
+                            }
                             ShareSDK.share(.subTypeWechatSession, parameters: shareParames, onStateChanged: { (state, value, entity, error) in
                                 switch state{
                                     
@@ -273,11 +322,19 @@ class WebViewController: UIViewController, WKScriptMessageHandler, BMKLocationSe
                     }else if function == "shareSinaWb" {
                         if let dicContent = body["parameters"] as? [String: String] {
                             let shareParames = NSMutableDictionary()
-                            shareParames.ssdkSetupShareParams(byText: dicContent["desc"]!,
-                                                              images : UIImage(named: "logo1"),
-                                                              url : URL(string: dicContent["url"]!),
-                                                              title : dicContent["title"]!,
-                                                              type : SSDKContentType.auto)
+                            if let img = dicContent["img"], img.hasSuffix("http") {
+                                shareParames.ssdkSetupShareParams(byText: dicContent["desc"]!,
+                                                                  images : img,
+                                                                  url : URL(string: dicContent["url"]!),
+                                                                  title : dicContent["title"]!,
+                                                                  type : SSDKContentType.auto)
+                            } else {
+                                shareParames.ssdkSetupShareParams(byText: dicContent["desc"]!,
+                                                                  images : UIImage(named: "logo1"),
+                                                                  url : URL(string: dicContent["url"]!),
+                                                                  title : dicContent["title"]!,
+                                                                  type : SSDKContentType.auto)
+                            }
                             ShareSDK.share(.typeSinaWeibo, parameters: shareParames, onStateChanged: { (state, value, entity, error) in
                                 switch state{
                                     
@@ -295,11 +352,19 @@ class WebViewController: UIViewController, WKScriptMessageHandler, BMKLocationSe
                     }else if function == "shareQq" {
                         if let dicContent = body["parameters"] as? [String: String] {
                             let shareParames = NSMutableDictionary()
-                            shareParames.ssdkSetupShareParams(byText: dicContent["desc"]!,
-                                                              images : UIImage(named: "logo1"),
-                                                              url : URL(string: dicContent["url"]!),
-                                                              title : dicContent["title"]!,
-                                                              type : SSDKContentType.auto)
+                            if let img = dicContent["img"], img.hasPrefix("http") {
+                                shareParames.ssdkSetupShareParams(byText: dicContent["desc"]!,
+                                                                  images : img,
+                                                                  url : URL(string: dicContent["url"]!),
+                                                                  title : dicContent["title"]!,
+                                                                  type : SSDKContentType.auto)
+                            } else {
+                                shareParames.ssdkSetupShareParams(byText: dicContent["desc"]!,
+                                                                  images : UIImage(named: "logo1"),
+                                                                  url : URL(string: dicContent["url"]!),
+                                                                  title : dicContent["title"]!,
+                                                                  type : SSDKContentType.auto)
+                            }
                             ShareSDK.share(.subTypeQQFriend, parameters: shareParames, onStateChanged: { (state, value, entity, error) in
                                 switch state{
                                     
@@ -317,11 +382,19 @@ class WebViewController: UIViewController, WKScriptMessageHandler, BMKLocationSe
                     }else if function == "shareQzone" {
                         if let dicContent = body["parameters"] as? [String: String] {
                             let shareParames = NSMutableDictionary()
-                            shareParames.ssdkSetupShareParams(byText: dicContent["desc"]!,
-                                                              images : UIImage(named: "logo1"),
-                                                              url : URL(string: dicContent["url"]!),
-                                                              title : dicContent["title"]!,
-                                                              type : SSDKContentType.auto)
+                            if let img = dicContent["img"], img.hasSuffix("http") {
+                                shareParames.ssdkSetupShareParams(byText: dicContent["desc"]!,
+                                                                  images : img,
+                                                                  url : URL(string: dicContent["url"]!),
+                                                                  title : dicContent["title"]!,
+                                                                  type : SSDKContentType.auto)
+                            } else {
+                                shareParames.ssdkSetupShareParams(byText: dicContent["desc"]!,
+                                                                  images : UIImage(named: "logo1"),
+                                                                  url : URL(string: dicContent["url"]!),
+                                                                  title : dicContent["title"]!,
+                                                                  type : SSDKContentType.auto)
+                            }
                             ShareSDK.share(.subTypeQZone, parameters: shareParames, onStateChanged: { (state, value, entity, error) in
                                 switch state{
                                     
@@ -343,21 +416,29 @@ class WebViewController: UIViewController, WKScriptMessageHandler, BMKLocationSe
                     }else if function == "hideTitleBar" {
                         self.navigationController?.setNavigationBarHidden(true, animated: false)
                     }else if function == "weipay" {
-                        if let token = UserDefaults.standard.string(forKey: "token"), token.characters.count > 0 {
+                        if let token = UserDefaults.standard.string(forKey: "token"), token.count > 0 {
+                            var order_sn = ""
                             if let dicContent = body["parameters"] as? [String: String] {
-                                if let order_sn = dicContent["order_sn"] {
-                                    NetworkTools.shared.get("https://www.fuwan369.com/index.php/user/oapi/weipay？token=\(token)&order_sn=\(order_sn)", parameters: nil) { (isSuccess, result, error) in
-                                        if isSuccess {
-                                            if result != nil {
-                                                let request = PayReq()
-                                                request.partnerId = result!["partnerid"].string
-                                                request.prepayId = result!["prepayid"].string
-                                                request.package = result!["package"].string
-                                                request.nonceStr = result!["noncestr"].string
-                                                request.timeStamp = UInt32(result!["timestamp"].string ?? "0") ?? 0
-                                                request.sign = result!["sign"].string
-                                                WXApi.send(request)
-                                            }
+                                order_sn = dicContent["order_sn"] ?? ""
+                            }
+                            if let dicContent = body["parameters"] as? String {
+                                let array = dicContent.components(separatedBy: "=")
+                                if array.count == 2 {
+                                    order_sn = array[1]
+                                }
+                            }
+                            if order_sn.count > 0 {
+                                NetworkTools.shared.get("https://www.fuwan369.com/index.php/user/oapi/weipay?token=\(token)&order_sn=\(order_sn)&client=ios", parameters: nil, changeUrl: true) { (isSuccess, result, error) in
+                                    if isSuccess {
+                                        if result != nil {
+                                            let request = PayReq()
+                                            request.partnerId = result!["partnerid"].string
+                                            request.prepayId = result!["prepayid"].string
+                                            request.package = result!["package"].string
+                                            request.nonceStr = result!["noncestr"].string
+                                            request.timeStamp = UInt32(result!["timestamp"].int ?? 0)
+                                            request.sign = result!["sign"].string
+                                            WXApi.send(request)
                                         }
                                     }
                                 }
@@ -465,7 +546,7 @@ extension WebViewController : WKNavigationDelegate{
         /// 获取网页title
         if !bSingle {
             bSingle = true
-            if let token = UserDefaults.standard.string(forKey: "token"), token.characters.count > 0 {
+            if let token = UserDefaults.standard.string(forKey: "token"), token.count > 0 {
                 mWebView.evaluateJavaScript("reload_data('\(token)');") { (result, error) in
 
                 }
@@ -487,10 +568,17 @@ extension WebViewController : WKNavigationDelegate{
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if let urlString = webView.url?.absoluteString {
-            if let orderInfoString = AlipaySDK.defaultService().fetchOrderInfo(fromH5PayUrl: urlString), orderInfoString.characters.count > 0 {
-                AlipaySDK.defaultService().payOrder(orderInfoString, fromScheme: "alisdkdemo", callback: { (result) in
-                    print("\(result)")
-                })
+            let value = AlipaySDK.defaultService().payInterceptor(withUrl: urlString, fromScheme: "alisdkdemo", callback: {[weak self] (result) in
+                if let res = result as? [String: Any] {
+                    if let isProcessUrlPay = res["isProcessUrlPay"] as? Bool, isProcessUrlPay {
+                        if let returnUrl = res["returnUrl"] as? String, returnUrl.count > 0 && returnUrl.hasPrefix("http") {
+                            let webRequest = URLRequest(url: URL(string: returnUrl)!, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 30)
+                            self?.mWebView.load(webRequest)
+                        }
+                    }
+                }
+            })
+            if value {
                 decisionHandler(.cancel)
                 return
             }
@@ -511,8 +599,6 @@ extension WebViewController : WKNavigationDelegate{
     
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         indicatorView.stopAnimating()
-        emptyDataSetShown = true
-        mWebView.scrollView.reloadEmptyDataSet()
     }
     
 }

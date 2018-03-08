@@ -38,6 +38,11 @@ class loginViewController: UIViewController {
         setupLoginViewSubView()
         
     }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
 //MARK: 私有方法
     private func setupLoginView() {
         mainView.delegate = self
